@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white w-100 navigation" id="navbar">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" routerLink="/">NNN</a>
+
+        <li class="list-inline-item navbar-toggler">
+            <a routerLink="/cart">
+                <i class="tf-ion-android-cart"></i>
+            </a>
+        </li>
+
+        <li class="list-inline-item navbar-toggler">
+            <a routerLink="/user" (click)="isLogged()">
+                <i class="tf-ion-ios-person"></i>
+            </a>
+        </li>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar"
+            aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse " id="main-navbar">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/">Trang chủ</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/about">Về cửa hàng</a>
+                </li>
+
+                <li class="nav-item dropdown dropdown-slide">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown3" role="button" data-delay="350"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" routerLink="/product-all">
+                        Sản phẩm
+                    </a>
+                </li>
+                <li class="nav-item" *ngIf="showAdminBoard">
+                    <a routerLink="/admin" class="nav-link" routerLink="admin">Admin</a>
+                </li>
+            </ul>
+        </div>
+
+        <ul class="top-menu list-inline mb-0 d-none d-lg-block" id="top-menu">
+            <li class="dropdown cart-nav dropdown-slide list-inline-item" *ngIf="isLoggedIn">
+                <a class="dropdown-toggle cart-icon" data-toggle="dropdown" data-hover="dropdown">
+                    <i class="tf-ion-android-cart pointer" routerLink="/cart"></i>
+                </a>
+            </li>
+            <li class="list-inline-item nav-item dropdown dropdown-slide">
+                <a class="dropdown-toggle" id="navbarDropdownUser" role="button" data-delay="350" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" (click)="isLogged()" style="cursor: pointer;">
+                    <i class="tf-ion-ios-person mr-3"></i>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownUser" *ngIf="isLoggedIn">
+                    <li><a routerLink="/user" style="cursor: pointer;">Thông tin cá nhân</a></li>
+                    <li><a (click)="logout()" style="cursor: pointer;">Thoát</a></li>
+                </ul>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownUser" *ngIf="!isLoggedIn">
+                    <li><a routerLink="/login">Đăng nhập</a></li>
+                    <li><a routerLink="/signup">Đăng kí</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

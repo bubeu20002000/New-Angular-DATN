@@ -1,0 +1,126 @@
+<section class="page-header">
+  <div class="overly"></div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="content text-center">
+          <h1 class="mb-3">Chi tiết sản phẩm</h1>
+          <hr style="border: 1px solid black;">
+          <p><br></p>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent justify-content-center">
+              <li class="breadcrumb-item"><a routerLink="/">Trang chủ</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Chi tiết sản phẩm</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="single-product">
+  <div class="container">
+    <div class="row">
+      <!-- Images -->
+      <div class="col-md-5">
+        <div class="single-product-slider">
+          <div class="carousel slide" data-ride="carousel" id="single-product-slider">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="{{img_one}}" alt="" class="img-fluid">
+              </div>
+              <div class="carousel-item">
+                <img src="{{img_two}}" alt="" class="img-fluid">
+              </div>
+            </div>
+
+            <ol class="carousel-indicators">
+              <li data-target="#single-product-slider" data-slide-to="0" class="active">
+                <img src="{{img_one}}" alt="" class="img-fluid">
+              </li>
+              <li data-target="#single-product-slider" data-slide-to="1">
+                <img src="{{img_two}}" alt="" class="img-fluid">
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <!-- Product -->
+      <div class="col-md-7">
+        <div class="single-product-details mt-5 mt-lg-0">
+          <h2>{{prodname}}</h2>
+          <div class="sku_wrapper mb-4">
+            SKU: <span class="text-muted">{{sku}}</span>
+          </div>
+
+          <hr>
+
+          <h3 class="product-price">{{price | number}} đ</h3>
+
+          <p class="product-description my-4 ">
+            {{description}}
+          </p>
+
+          <div class="product-size d-flex align-items-center mt-4" *ngIf="status">
+            <span class="font-weight-bold text-capitalize product-meta-title">Kích cỡ:</span>
+            <button class="btn btn-small btn-black mr-2" *ngFor="let size of size;let idx = index" (click)="click(idx,size)"
+              [ngClass]="{'active-button-size': selected == idx}" [disabled]="instock[idx]=='0'">{{size}}</button>
+          </div>
+
+          <small>
+            <p>Còn {{stock}} sản phẩm.</p>
+          </small>
+
+          <form class="cart mt-4" action="#" method="post" *ngIf="status">
+            <div class="quantity d-flex align-items-center">
+              <span class="font-weight-bold text-capitalize product-meta-title">Số lượng:</span>
+              <input type="number" class="input-text qty text form-control w-25 mr-3" step="1" min="1" max="{{stock}}"
+                name="quantity" [(ngModel)]="quantity" size="4">
+              <a class="btn btn-main btn-small" (click)="isLogged()">Thêm vào giỏ</a>
+            </div>
+          </form>
+          <div>
+            <a class="btn btn-main mt-4" *ngIf="!status">Hết hàng</a>
+          </div>
+
+          <div class="products-meta mt-4">
+            <div class="product-category d-flex align-items-center">
+              <span class="font-weight-bold text-capitalize product-meta-title">Màu sắc:</span>
+              <a>{{color}}</a>
+            </div>
+            <div class="product-category d-flex align-items-center">
+              <span class="font-weight-bold text-capitalize product-meta-title">Giới tính:</span>
+              <a>{{cate}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <nav class="product-info-tabs wc-tabs mt-5 mb-5">
+          <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+              aria-controls="nav-home" aria-selected="true">Giới thiệu</a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+              aria-controls="nav-profile" aria-selected="false">Bảng kích cỡ</a>
+          </div>
+        </nav>
+
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <p>
+              {{description}}
+            </p>
+            <p>Màu sắc: {{color}}</p>
+          </div>
+          <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <img src="assets\images\bang-size-giay-chuan.png" class="mx-auto d-block">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

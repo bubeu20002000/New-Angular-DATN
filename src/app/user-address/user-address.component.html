@@ -1,0 +1,71 @@
+<section class="page-header">
+    <div class="overlay"></div> 	
+    <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+        <div class="content text-center">
+            <h1 class="mb-3">Địa chỉ</h1>
+            <hr style="border: 1px solid black;">
+            <p><br></p>
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent justify-content-center">
+                <li class="breadcrumb-item"><a routerLink="/">Trang chủ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Địa chỉ</li>
+            </ol>
+        </nav>
+        </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+
+<section class="user-dashboard page-wrapper">
+    <div class="container">
+    <div class="row">
+        <div class="col-12 col-md-5 col-sm-12 col-lg-3">
+            <div class="nav flex-column nav-pills">
+                <a class="nav-link" routerLink="/user">Chung</a>
+            </div>
+            <div class="nav flex-column nav-pills">
+                <a class="nav-link" routerLink="/orders" >Đơn hàng</a>
+            </div>
+            <div class="nav flex-column nav-pills">
+                <a class="nav-link active" routerLink="/user-address" >Địa chỉ</a>
+            </div>
+            <div class="nav flex-column nav-pills">
+                <a class="nav-link" routerLink="/user-details" >Thông tin liên lạc</a>
+            </div>
+            <div class="nav flex-column nav-pills">
+                <a class="nav-link pointer" (click)="callLogout()">Thoát</a>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-7 col-sm-12 col-lg-9">
+            <a class="btn pointer" (click)="hidden()" *ngIf="show"><fa-icon [icon]="faCircleArrowLeft"></fa-icon> Quay về</a>
+            
+            <app-user-address-edit *ngIf="show" 
+            [Addr_1]="currentAddr_1"
+            [City]="currentCity"
+            [District]="currentDistrict"
+            [Ward]="currentWard"
+            >
+            </app-user-address-edit>
+
+        <div class="account-info" *ngIf="!show">
+            <div class="card p-4">
+                <h4 class="card-title">Địa chỉ<a class="float-right text-sm pointer" (click)="hidden()"><fa-icon [icon]="faPenToSquare"></fa-icon></a></h4>
+                    <address>{{currentAddr_1}}</address>
+                    <address><strong>{{currentCity}} - {{currentDistrict}} - {{currentWard}}</strong></address>
+            </div>
+            <br>
+            <!-- <div class="card p-4">
+                <h4 class="card-title">Địa chỉ 2<a class="float-right text-sm pointer" (click)="hidden()">Sửa</a></h4>
+                    <address>{{currentAddr_2}}</address>
+            </div> -->
+        </div>
+        </div>
+    </div>
+    </div>
+</section>

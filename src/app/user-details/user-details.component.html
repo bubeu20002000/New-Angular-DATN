@@ -1,0 +1,107 @@
+<section class="page-header">
+    <div class="overly"></div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="content text-center">
+                    <h1 class="mb-3">Thay đổi</h1>
+                    <hr style="border: 1px solid black;">
+                    <p><br></p>
+
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb bg-transparent justify-content-center">
+                            <li class="breadcrumb-item"><a routerLink="/">Trang chủ</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Thay đổi</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="user-dashboard page-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-5 col-sm-12 col-lg-3">
+                <div class="nav flex-column nav-pills">
+                    <a class="nav-link" routerLink="/user">Chung</a>
+                </div>
+                <div class="nav flex-column nav-pills">
+                    <a class="nav-link" routerLink="/orders">Đơn hàng</a>
+                </div>
+                <div class="nav flex-column nav-pills">
+                    <a class="nav-link" routerLink="/user-address">Địa chỉ</a>
+                </div>
+                <div class="nav flex-column nav-pills">
+                    <a class="nav-link active" routerLink="/user-details">Thông tin liên lạc</a>
+                </div>
+                <div class="nav flex-column nav-pills">
+                    <a class="nav-link pointer" (click)="callLogout()">Thoát</a>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-7 col-sm-12 col-lg-9">
+                <div class="tab-pane fade show">
+                    <header style="padding-top: 10px;">
+                        <h4>
+                            Thay đổi thông tin
+                        </h4>
+                    </header>
+                    <form action="#" class="" [formGroup]="userEmails">
+                        <div class="card p-4">
+                            <div class="form-group">
+                                <label>Email hiện tại:
+                                    <strong>{{email}}</strong>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>Email mới: </label>
+                                <input [class.is-invalid]="primEmail?.invalid && primEmail?.touched" type="email"
+                                    class="form-control" formControlName="primaryEmail">
+                                <div *ngIf="(primEmail?.invalid && primEmail?.touched) || primEmail?.dirty">
+                                    <small *ngIf="primEmail?.errors?.required" class="text-danger">Email không được để
+                                        trống!</small>
+                                    <!--question mark(?) is a safe navigation operator-->
+                                    <small *ngIf="primEmail?.errors?.pattern" class="text-danger">Email không đúng định
+                                        dạng!</small>
+                                </div>
+                            </div>
+
+                            <button [disabled]="primEmail?.invalid" class="btn btn-dark" type="submit" (click)="changeEmail()">
+                                Thay đổi
+                            </button>
+                        </div>
+                    </form>
+
+                    <form action="#" class="" [formGroup]="userEmails">
+                        <div class="card p-4">
+                            <div class="form-group">
+                                <label>Số điện thoại hiện tại (+84):
+                                    <strong>{{phone}}</strong>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>Số điện thoại mới (+84)</label>
+                                <input [class.is-invalid]="phoneNumber?.invalid && phoneNumber?.touched" type="text"
+                                    class="form-control" formControlName="phoneNumber" maxlength="11">
+                                <div *ngIf="(phoneNumber?.invalid && phoneNumber?.touched) || phoneNumber?.dirty">
+                                    <small *ngIf="phoneNumber?.errors?.required" class="text-danger">Số điện thoại không
+                                        được để trống!</small>
+                                    <small *ngIf="phoneNumber?.errors?.pattern" class="text-danger">Xin hãy nhập
+                                        số<br></small>
+                                    <small *ngIf="phoneNumber?.errors?.minlength" class="text-danger">Số điện thoại lớn
+                                        hơn 10</small>
+                                </div>
+                            </div>
+                            <button class="btn btn-dark" [disabled]="phoneNumber?.invalid" (click)="changePN()">
+                                Thay đổi
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

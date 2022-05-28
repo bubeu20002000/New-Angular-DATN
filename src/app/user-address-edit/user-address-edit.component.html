@@ -1,0 +1,52 @@
+<section class="user-dashboard">
+    <div class="container">
+        <div class="card p-4">
+            <!-- <div class="col-12 col-md-7 col-sm-12 col-lg-9"> -->
+                <h4>Sửa địa chỉ</h4>
+                <form action="#">
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Thành phố/Tỉnh</mat-label>
+                            <mat-select *ngIf="cities" (selectionChange)="onSelectCity($event)" name="selectedCity">
+                                <mat-option *ngFor="let c of cities" value={{c.code}}>
+                                    {{c.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Quận/Huyện</mat-label>
+                            <mat-select *ngIf="districts" (selectionChange)="onSelectDistrict($event)"
+                                name="selectedDistrict">
+                                <mat-option *ngFor="let d of filter_districts" value={{d.code}}>
+                                    {{d.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Phường/Xã</mat-label>
+                            <mat-select (selectionChange)="onSelectWard($event)">
+                                <mat-option *ngFor="let w of filter_wards" value={{w.code}}>
+                                    {{w.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group mb-4">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Địa chỉ</mat-label>
+                            <textarea matInput [(ngModel)]="Addr_1" name="Addr_1"></textarea>
+                        </mat-form-field>
+                    </div>
+                    
+                </form>
+            <!-- </div> -->
+            <button class="btn btn-dark" type="submit" (click)="updateAddr()">Thay
+                đổi
+            </button>
+        </div>
+    </div>
+</section>

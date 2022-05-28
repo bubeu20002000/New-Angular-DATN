@@ -1,0 +1,103 @@
+<div class="account section">
+    <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+        <div class="login-form border p-5">
+            <div class="text-center heading">
+            <h2 class="mb-2">Đăng kí</h2>
+            <p class="lead">Đã có tài khoản?<br><a routerLink="/login"> Đăng nhập</a></p>
+            </div>
+
+            <form 
+                *ngIf="!isSuccessful"
+                name="form"
+                (ngSubmit)="f.form.valid && onSubmit()"
+                #f="ngForm"
+                novalidate
+            >
+            <!-- Username -->
+            <div class="form-group mb-4">
+                <label for="username">Điền tên tài khoản</label>
+                <input type="text" class="form-control" placeholder="Tên tài khoản" 
+                name="username"
+                [(ngModel)]="form.username"
+                required
+                minlength="3"
+                maxlength="20"
+                #username="ngModel">
+                <!-- Validation -->
+                <div class="alert-danger" *ngIf="username.errors && f.submitted">
+                    <div *ngIf="username.errors.required">Tên tài khoản đang trống</div>
+                    <div *ngIf="username.errors.minlength">
+                        Tên tài khoản phải ít nhất 3 kí tự
+                    </div>
+                    <div *ngIf="username.errors.maxlength">
+                        Tên tài khoản dài, giới hạn 20 kí tự
+                    </div>
+                </div>
+                <!-- End Validation -->
+            </div>
+            <!-- End Username -->
+
+            <!-- Email  -->
+            <div class="form-group mb-4">
+                <label for="email">Điền Email</label>
+                <!-- <a class="float-right" routerLink="">Forget password?</a> -->
+                <input type="email" class="form-control" placeholder="Email"
+                name="email"
+                [(ngModel)]="form.email"
+                required
+                email
+                #email="ngModel">
+                <!-- Validation -->
+                <div class="alert-danger" *ngIf="email.errors && f.submitted">
+                    <div *ngIf="email.errors.required">Email không được để trống</div>
+                    <div *ngIf="email.errors.email">
+                      Email sai định dạng
+                    </div>
+                </div>
+                <!-- End Validation -->
+            </div>
+            <!-- End Email  -->
+
+            <!-- Password -->
+            <div class="form-group mb-4">
+                <label for="password">Điền mật khẩu</label>
+                <input type="password" class="form-control" placeholder="Mật khẩu"
+                class="form-control"
+                name="password"
+                [(ngModel)]="form.password"
+                required
+                minlength="6"
+                #password="ngModel"> 
+                <!-- Validation -->
+                <div class="alert-danger" *ngIf="password.errors && f.submitted">
+                    <div *ngIf="password.errors.required">Mật khẩu không được để trống</div>
+                    <div *ngIf="password.errors.minlength">
+                      Mật khẩu phải ít nhất 6 kí tự
+                    </div>
+                </div>
+                <!-- End Validation -->
+            </div>
+            <!-- End Password -->
+            <div class="form-group">
+                <button class="btn btn-main mt-3 btn-block">Đăng kí</button>
+            </div>
+            
+            <!-- Notice -->
+            <div class="alert alert-warning text-center" *ngIf="f.submitted && isSignUpFailed">
+                Đăng kí tài khoản thất bại!<br />{{ errorMessage }}
+            </div>
+            <!-- End Notice -->
+            </form>
+
+            <!-- Notice -->
+            <div class="alert alert-success text-center" *ngIf="isSuccessful">
+                Đăng kí tài khoản thành công!
+            </div>
+            <!-- End Notice -->
+        </div>  
+        </div>
+    </div>
+    </div>
+</div>

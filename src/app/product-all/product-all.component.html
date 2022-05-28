@@ -1,0 +1,158 @@
+<section class="page-header">
+    <div class="overly"></div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="content text-center">
+                    <h1 class="mb-3">Sản phẩm</h1>
+                    <hr style="border: 1px solid black;">
+                    <p><br></p>
+
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb bg-transparent justify-content-center">
+                            <li class="breadcrumb-item"><a routerLink="/">Trang chủ</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Sản phẩm</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="products-shop section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="row align-items-center">
+                    <div class="col-lg-12 mb-4 mb-lg-0">
+                        <div class="section-title">
+                            <h2 class="d-block text-left-sm">Trang sản phẩm</h2>
+
+                            <div class="d-flex justify-content-center">
+                                <div class="search-shop">
+                                    <input type="text" class="search-shop-input" placeholder="Tìm kiếm theo tên ..."
+                                        name="" [(ngModel)]="title" (keyup.enter)="searchTitle()">
+                                    <button type="button" class="search-shop-icon btn btn-block"
+                                        (click)="searchTitle()">
+                                        <i class="tf-ion-android-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="btn-group d-flex mb-5" (click)="onButtonGroupClick($event)">
+                                <button type="button" class="btn btn-light btn-small active" (click)="refreshList()">Tất
+                                    cả sản phẩm</button>
+                                <button type="button" class="btn btn-light btn-small" (click)="getProdsAsc()">Giá từ
+                                    thấp đến cao</button>
+                                <button type="button" class="btn btn-light btn-small" (click)="getProdsDesc()">Giá từ
+                                    cao đến thấp</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4 col-12 col-md-6 col-sm-6 mb-5" *ngFor="
+                            let product of products | paginate : {
+                                    itemsPerPage: pageSize,
+                                    currentPage: page,
+                                    totalItems: count
+                                  };
+                            let i = index" [class.active]="i == currentIndex" (click)="setActiveProducts(product, i)">
+
+                        <div class="product">
+                            <div class="product-wrap">
+                                <a routerLink="/product-single/{{product.id}}"><img
+                                        class="img-fluid w-100 mb-3 img-first" src="assets/images/{{product.prodimg1}}"
+                                        alt="product-img" /></a>
+                                <a routerLink="/product-single/{{product.id}}"><img
+                                        class="img-fluid w-100 mb-3 img-second" src="assets/images/{{product.prodimg2}}"
+                                        alt="product-img" /></a>
+                            </div>
+
+                            <span class="onsale" *ngIf="!product.prodstatus">Hết hàng</span>
+                            <div class="product-hover-overlay">
+                                <a href="#"><i class="tf-ion-android-cart"></i></a>
+                                <!-- <a href="#"><i class="tf-ion-ios-heart"></i></a> -->
+                            </div>
+
+                            <div class="product-info">
+                                <span class="price">
+                                    {{product.prodprice | number}}đ
+                                </span>
+                                <h2 class="product-title h5 mb-0"><a
+                                        routerLink="/product-single/{{product.id}}">{{product.prodname}}</a></h2>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                <pagination-controls previousLabel="Quay về" nextLabel="Tiếp" [responsive]="true"
+                                    (pageChange)="handlePageChange($event)"></pagination-controls>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <h2 class="widget-title h2 mb-4">Tìm kiếm</h2>
+                <form class="mb-5 card p-3">
+                    <!-- size -->
+                    <section class="widget widget-colors mb-5">
+                        <h3 class="widget-title h4 mb-4">Theo kích cỡ</h3>
+                        <ul class="list-inline">
+                            <li class="list-inline-item mr-3 mb-2" *ngFor="let number of numbers; let idx = index">
+                                <button class="btn btn-black" [value]="number" (click)="click(idx,number)"
+                                    [ngClass]="{'active-button-size': selected == idx}"
+                                    [disabled]="aval_size?.indexOf(number)===-1">{{number}}</button>
+                            </li>
+                            <a class="pointer" (click)="openDialog()">Bảng kích cỡ</a>
+                        </ul>
+                    </section>
+
+                    <!-- cate -->
+                    <section class="widget widget-sizes mb-5">
+                        <h3 class="widget-title h4 mb-4">Theo giới tính</h3>
+                        <section [formGroup]="genders">
+                            <mat-checkbox class="mr-1" formControlName="men" [checked]="genders.value.men" (change)="genders.value.women = false;
+                                    genders.value.unisex = false; changeGenders()">Nam</mat-checkbox>
+                            <mat-checkbox class="mr-1" formControlName="women" [checked]="genders.value.women" (change)="genders.value.men = false;
+                                    genders.value.unisex = false; changeGenders()">Nữ</mat-checkbox>
+                            <!-- <mat-checkbox class="mr-1" formControlName="unisex" [checked]="genders.value.unisex"
+                                (change)="genders.value.women = false;
+                                    genders.value.men = false; changeGenders()">Unisex</mat-checkbox> -->
+                        </section>
+                    </section>
+                    <!-- type -->
+                    <section class="widget widget-sizes mb-5">
+                        <h3 class="widget-title h4 mb-4">Theo thể loại</h3>
+                        <section [formGroup]="types">
+                            <mat-checkbox formControlName="ox" [checked]="types.value.ox"
+                                (change)="types.value.lo=false ;types.value.bo=false ;types.value.sn=false ;types.value.cm=false ;types.value.fl=false;changeTypes();"
+                                class="mr-2">Oxfords and Derbies</mat-checkbox>
+                            <mat-checkbox formControlName="lo" [checked]="types.value.lo"
+                                (change)=" types.value.ox=false; types.value.bo=false; types.value.sn=false; types.value.cm=false; types.value.fl=false;changeTypes();"
+                                class="mr-2">Loafers</mat-checkbox>
+                            <mat-checkbox formControlName="bo" [checked]="types.value.bo"
+                                (change)=" types.value.ox=false; types.value.lo=false; types.value.sn=false; types.value.cm=false; types.value.fl=false;changeTypes();"
+                                class="mr-2">Boat Shoes</mat-checkbox>
+                            <mat-checkbox formControlName="sn" [checked]="types.value.sn"
+                                (change)=" types.value.ox=false; types.value.lo=false; types.value.bo=false; types.value.cm=false; types.value.fl=false;changeTypes();"
+                                class="mr-2">Sneakers</mat-checkbox>
+                            <mat-checkbox formControlName="cm" [checked]="types.value.cm"
+                                (change)=" types.value.ox=false; types.value.lo=false; types.value.bo=false; types.value.sn=false; types.value.fl=false;changeTypes();"
+                                class="mr-2">Mules</mat-checkbox>
+                            <mat-checkbox formControlName="fl" [checked]="types.value.fl"
+                                (change)=" types.value.ox=false; types.value.lo=false; types.value.bo=false; types.value.sn=false; types.value.cm=false;changeTypes();"
+                                class="mr-2">Flats</mat-checkbox>
+                        </section>
+                    </section>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

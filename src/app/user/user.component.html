@@ -1,0 +1,85 @@
+<section class="page-header">
+    <div class="overlay"></div> 	
+    <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+        <div class="content text-center">
+            <h1 class="mb-3">Thông tin cá nhân</h1>
+            <hr style="border: 1px solid black;">
+            <p><br></p>
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent justify-content-center">
+            <li class="breadcrumb-item"><a routerLink="/">Trang chủ</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Thông tin cá nhân</li>
+            </ol>
+        </nav>
+        </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+
+<section class="user-dashboard page-wrapper">
+    <div class="container">
+    <div class="row">
+        <div class="col-12 col-md-5 col-sm-12 col-lg-3">
+        <div class="nav flex-column nav-pills">
+            <a class="nav-link active" routerLink="/user">Chung</a>
+        </div>
+        <div class="nav flex-column nav-pills">
+            <a class="nav-link" routerLink="/orders" >Đơn hàng</a>
+        </div>
+        <div class="nav flex-column nav-pills">
+            <a class="nav-link" routerLink="/user-address" >Địa chỉ</a>
+        </div>
+        <div class="nav flex-column nav-pills">
+            <a class="nav-link" routerLink="/user-details" >Thông tin liên lạc</a>
+        </div>
+        <div class="nav flex-column nav-pills">
+            <a class="nav-link" routerLink="" (click)="callLogout()">Thoát</a>
+        </div>
+        </div>
+
+
+        <div class="col-12 col-md-7 col-sm-12 col-lg-9">
+            <div class="container" *ngIf="currentUser; else loggedOut">
+                <header style="padding-top: 10px;">
+                    <h4>
+                        <strong>Thông tin chung</strong> 
+                    </h4>
+                </header>
+                <p>
+                    <strong>Tên tài khoản:</strong>
+                    {{name}}
+                </p>
+                <p>
+                    <strong>Email:</strong>
+                    {{email}}
+                </p>
+                <p>
+                    <strong>Số điện thoại:</strong>
+                    {{phone_number}}
+                </p>
+                <p>
+                    <strong>Địa chỉ:</strong>
+                    {{address}}
+                </p>
+                <p>
+                    <strong>Thành phố:</strong>
+                    {{city}} 
+                    <strong>Quận/Huyện:</strong>
+                    {{district}}
+                    <strong>Phường:</strong>
+                    {{ward}} 
+                </p>
+                
+            </div>
+            <ng-template #loggedOut>
+                Xin hãy đăng nhập!
+            </ng-template>
+        </div>
+    </div>
+    </div>
+</section>

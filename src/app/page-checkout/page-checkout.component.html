@@ -1,0 +1,204 @@
+<section class="page-header">
+    <div class="overly"></div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="content text-center">
+                    <h1 class="mb-3">Thanh toán</h1>
+                    <hr style="border: 1px solid black;">
+                    <p><br></p>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb bg-transparent justify-content-center">
+                            <li class="breadcrumb-item"><a routerLink="/">Trang chủ</a></li>
+                            <li class="breadcrumb-item active">Thanh toán</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="page-wrapper">
+    <div class="checkout shopping">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 pr-5">
+                    <div class="billing-details mt-5">
+                        <h4 class="mb-4">Nhập thông tin thanh toán</h4>
+                        <form class="checkout-form" [formGroup]="form">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group mb-4">
+                                        <label>Họ và tên*</label>
+                                        <input type="text" class="form-control" formControlName="fullname"
+                                            [ngClass]="{ 'is-invalid': f.fullname.errors && f.fullname.touched}">
+                                        <div *ngIf="f.fullname.errors" class="invalid-feedback">
+                                            <div *ngIf="f.fullname.errors.required">Họ tên không được để trống</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group mb-4">
+                                        <label>Số điện thoại*</label>
+                                        <input type="text" class="form-control" formControlName="phone"
+                                            [ngClass]="{ 'is-invalid': f.phone.errors && f.phone.touched }">
+
+                                        <div *ngIf="f.phone.errors" class="invalid-feedback">
+                                            <div *ngIf="f.phone.errors.required">SĐT không được để trống</div>
+                                            <div *ngIf="f.phone.errors.minlength">
+                                                SĐT quá ngắn
+                                            </div>
+                                            <div *ngIf="f.phone.errors.maxlength">
+                                                SĐT quá dài
+                                            </div>
+                                            <div *ngIf="f.phone.errors.pattern">
+                                                Không đúng định dạng
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group mb-4">
+                                        <label>Tên công ty, chung cư,...</label>
+                                        <input type="text" class="form-control" formControlName="company">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <div class="form-group mb-4">
+                                        <label>Địa chỉ*</label>
+                                        <input type="text" class="form-control" formControlName="address"
+                                            [ngClass]="{ 'is-invalid': f.address.errors && f.address.touched }">
+                                        <div *ngIf="f.address.errors" class="invalid-feedback">
+                                            <div *ngIf="f.address.errors.required">Địa chỉ không được để trống</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group mb-4">
+                                        <label>Địa chỉ khác</label>
+                                        <input type="text" class="form-control" formControlName="address2">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <div class="form-group mb-4">
+                                        <mat-form-field appearance="fill" class="pr-3">
+                                            <mat-label>Thành phố/Tỉnh</mat-label>
+                                            <mat-select *ngIf="cities" (selectionChange)="onSelectCity($event)"
+                                                name="selectedCity" formControlName="city"
+                                                [ngClass]="{ 'is-invalid': f.city.errors }">
+                                                <mat-option *ngFor="let c of cities" value={{c.code}}>
+                                                    {{c.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="fill" class="pr-3">
+                                            <mat-label>Quận/Huyện</mat-label>
+                                            <mat-select *ngIf="districts" (selectionChange)="onSelectDistrict($event)"
+                                                name="selectedDistrict" formControlName="district"
+                                                [ngClass]="{ 'is-invalid': f.district.errors  }">
+                                                <mat-option *ngFor="let d of filter_districts" value={{d.code}}>
+                                                    {{d.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="fill" class="pr-3">
+                                            <mat-label>Phường/Xã</mat-label>
+                                            <mat-select (selectionChange)="onSelectWard($event)" formControlName="ward"
+                                                [ngClass]="{ 'is-invalid': f.ward.errors }">
+                                                <mat-option *ngFor="let w of filter_wards" value={{w.code}}>
+                                                    {{w.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group mb-4">
+                                        <label>Mã bưu chính</label>
+                                        <input type="text" class="form-control" formControlName="zip">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group mb-4">
+                                        <label>Email*</label>
+                                        <input type="text" class="form-control" placeholder="" formControlName="email"
+                                            [ngClass]="{ 'is-invalid': f.email.errors && f.email.touched }">
+                                        <div *ngIf="f.email?.errors" class="invalid-feedback">
+                                            <div *ngIf="f.email.errors?.required">Email không dược để trống</div>
+                                            <div *ngIf="f.email.errors?.email">Email không đúng định dạng</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group mb-4">
+                                        <label>Lời nhắn cho cửa hàng</label>
+                                        <textarea class="form-control" cols="30" rows="5" formControlName="note"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="product-checkout-details mt-5 mt-lg-0 p-4 card">
+                        <h4 class="mb-4 border-bottom pb-4">Đơn Đặt Hàng</h4>
+
+                        <div class="media product-card" *ngFor="let item of newList; let idx = index;">
+                            <p>{{idx+1}})</p>
+                            <p>{{item.product.prodname}} - {{item.product.prodsize}}</p>
+                            <div class="media-body text-right">
+                                <p class="h5">{{item.quantity}} x {{item.product.prodprice |number}}đ</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <ul class="summary-prices list-unstyled mb-4">
+                            <li class="d-flex justify-content-between">
+                                <span>Thành tiền</span>
+                                <span class="h5">{{total | number}}đ</span>
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                <span>Phí vận chuyển</span>
+                                <span class="h5" *ngIf="free">{{fee | number}}đ</span>
+                                <span class="h5" *ngIf="!free">{{fee | number}}đ</span>
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                <span>Tổng</span>
+                                <span class="h5">{{total_plus|number}}đ</span>
+                            </li>
+                        </ul>
+                        <hr>
+                        <p>Phương thức thanh toán</p>
+                        <form [formGroup]="form">
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="radio" formControlName="payment"
+                                    value="1">
+                                <label class="form-check-label" for="exampleRadios1">
+                                    Thanh toán qua ngân hàng
+                                </label>
+
+                            </div>
+
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="radio" formControlName="payment"
+                                    value="2">
+                                <label class="form-check-label" for="exampleRadios2">
+                                    Thanh toán khi nhận hàng
+                                </label>
+                            </div>
+
+                        </form>
+
+                        <button class="btn btn-main btn-small" (click)="order()" [disabled]="!form.valid">Đặt hàng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="account section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="login-form border p-5">
+                    <div class="text-center heading">
+                        <h2 class="mb-2">Đăng nhập</h2>
+                        <p class="lead" *ngIf="!isLoggedIn">Chưa có tài khoản?<br><a routerLink="/signup">Đăng kí</a></p>
+                        <p class="lead" *ngIf="isLoggedIn"><a routerLink="/">Trang chủ</a></p>
+                    </div>
+
+                    <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"
+                        novalidate>
+                        <!-- Username -->
+                        <div class="form-group mb-4">
+                            <label for="username">Điền tên tài khoản</label>
+                            <input type="text" class="form-control" placeholder="Tên tài khoản" name="username"
+                                [(ngModel)]="form.username" required #username="ngModel">
+                            <!-- validation -->
+                            <div class="alert alert-danger" role="alert" *ngIf="username.errors && f.submitted">
+                                Tên tài khoản không được để trống!
+                            </div>
+                            <!-- End Validation -->
+                        </div>
+                        <!-- End Username -->
+                        <!-- Password -->
+                        <div class="form-group">
+                            <label for="#">Điền mật khẩu</label>
+                            <a class="float-right" routerLink="/forgot-password">Quên mật khẩu?</a>
+                            <input type="password" class="form-control" placeholder="Mật khẩu" name="password"
+                                [(ngModel)]="form.password" required minlength="6" #password="ngModel">
+                            <!-- Validation -->
+                            <div class="alert alert-danger" role="alert" *ngIf="password.errors && f.submitted">
+                                <div *ngIf="password.errors.required">Mật khẩu không được để trống</div>
+                                <div *ngIf="password.errors.minlength">
+                                    Mật khẩu phải ít nhất 6 kí tự
+                                </div>
+                            </div>
+                            <!-- End Validation -->
+                        </div>
+
+                        <!-- End Password -->
+
+                        <div class="form-group">
+                            <button class="btn btn-main mt-3 btn-block">
+                                Đăng nhập
+                            </button>
+                        </div>
+                        <!-- <a routerLink="#" class="btn btn-main mt-3 btn-block">Login</a> -->
+
+                        <!-- Notice -->
+                        <div class="form-group">
+                            <div class="alert alert-danger text-center" role="alert"
+                                *ngIf="f.submitted && isLoginFailed">
+                                {{ errorMessage }}
+                            </div>
+                        </div>
+                        <!-- End Notice -->
+                    </form>
+
+                    <div class="alert alert-success text-center" *ngIf="isLoggedIn">
+                        Đăng nhập thành công
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

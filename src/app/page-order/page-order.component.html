@@ -1,0 +1,95 @@
+<section class="page-header">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="content text-center">
+          <h1 class="mb-3">Đơn hàng</h1>
+          <hr style="border: 1px solid black;">
+          <p><br></p>
+
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent justify-content-center">
+              <li class="breadcrumb-item"><a routerLink="/">Trang chủ</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Đơn hàng</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="user-dashboard page-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-5 col-sm-12 col-lg-3">
+        <div class="nav flex-column nav-pills">
+          <a class="nav-link" routerLink="/user">Chung</a>
+        </div>
+        <div class="nav flex-column nav-pills">
+          <a class="nav-link active" routerLink="/orders">Đơn hàng</a>
+        </div>
+        <div class="nav flex-column nav-pills">
+          <a class="nav-link" routerLink="/user-address">Địa chỉ</a>
+        </div>
+        <div class="nav flex-column nav-pills">
+          <a class="nav-link" routerLink="/user-details">Thông tin liên lạc</a>
+        </div>
+        <div class="nav flex-column nav-pills">
+          <a class="nav-link pointer" (click)="callLogout()">Thoát</a>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-7 col-sm-12 col-lg-9">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Đơn hàng</th>
+              <th scope="col">Ngày</th>
+              <th scope="col">Tình trạng</th>
+              <th scope="col">Tổng</th>
+              <th scope="col">Hành động</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of new_orders">
+              <th scope="row">#{{item.id}}</th>
+              <td>{{item.date}}</td>
+              <td>{{item.status == 1?'Đang xử lý':'Hoàn thành'}}</td>
+              <td>{{item.total | number}} đ</td>
+              <td><a><button class="btn-dark" (click)="getDetailsOrder(item.id)">Xem</button></a></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div *ngIf="show">
+          <p>Chi tiết đơn hàng #{{pid}}</p>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Tên sản phẩm</th>
+                <th scope="col">Kích cỡ</th>
+                <th scope="col">Giá</th>
+                <th scope="col">Số lượng</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of prods">
+                <th scope="row">#{{item.id}}</th>
+                <td>{{item.date}}</td>
+                <td>{{item.status == 1?'Đang xử lý':'Hoàn thành'}}</td>
+                <td>{{item.total | number}} đ</td>
+                <td>P</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</section>

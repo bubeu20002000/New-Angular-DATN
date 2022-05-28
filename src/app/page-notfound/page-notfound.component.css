@@ -1,0 +1,6 @@
+.error-template {padding: 40px 15px;text-align: center;}
+.error-actions {margin-top:15px;margin-bottom:15px;}
+.error-actions .btn { margin-right:10px; }
+#error-btn {background-color: black;}
+#error-btn:hover {border: 2px solid #fb5c42; color: #fb5c42;}
+#error-btn:focus {background-color: #fb5c42;}
