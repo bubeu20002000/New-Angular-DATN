@@ -20,7 +20,6 @@
   </div>
 </section>
 
-
 <section class="user-dashboard page-wrapper">
   <div class="container">
     <div class="row">
@@ -43,14 +42,14 @@
       </div>
 
       <div class="col-12 col-md-7 col-sm-12 col-lg-9">
-        <table class="table table-bordered">
+        <table class="table table-bordered table-responsive">
           <thead>
             <tr>
-              <th scope="col">Đơn hàng</th>
-              <th scope="col">Ngày</th>
-              <th scope="col">Tình trạng</th>
-              <th scope="col">Tổng</th>
-              <th scope="col">Hành động</th>
+              <th scope="col" style="text-align:center;">Đơn hàng</th>
+              <th scope="col" style="width:25%; text-align:center;">Ngày</th>
+              <th scope="col" style="width:25%; text-align:center;">Tình trạng</th>
+              <th scope="col" style="width:25%; text-align:center;">Tổng</th>
+              <th scope="col" style="width:25%; text-align:center;">Hành động</th>
             </tr>
           </thead>
           <tbody>
@@ -59,13 +58,13 @@
               <td>{{item.date}}</td>
               <td>{{item.status == 1?'Đang xử lý':'Hoàn thành'}}</td>
               <td>{{item.total | number}} đ</td>
-              <td><a><button class="btn-dark" (click)="getDetailsOrder(item.id)">Xem</button></a></td>
+              <td class="d-flex justify-content-center"><a><button class="btn-dark" (click)="getDetailsOrder(item.id)">Xem</button></a></td>
             </tr>
           </tbody>
         </table>
 
         <div *ngIf="show">
-          <p>Chi tiết đơn hàng #{{pid}}</p>
+          <p>Chi tiết đơn hàng <strong>#{{pid}}</strong></p>
           <table class="table table-bordered">
             <thead>
               <tr>
@@ -77,19 +76,17 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of prods">
-                <th scope="row">#{{item.id}}</th>
-                <td>{{item.date}}</td>
-                <td>{{item.status == 1?'Đang xử lý':'Hoàn thành'}}</td>
-                <td>{{item.total | number}} đ</td>
-                <td>P</td>
+              <tr *ngFor="let item of prods; let idx = index;">
+                <th scope="row">#{{idx+1}}</th>
+                <td>{{item.product.prodname}}</td>
+                <td>{{item.product.prodsize}}</td>
+                <td>{{item.product.prodprice | number}} đ</td>
+                <td>{{item.quantity}}</td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-
-
     </div>
   </div>
 </section>

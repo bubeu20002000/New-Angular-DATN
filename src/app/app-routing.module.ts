@@ -40,11 +40,11 @@ const routes: Routes = [
 
   { path:"about", component:PageAboutComponent},
 
+  {path: 'admin', component: MainComponent},
+
   {path: '404', component: PageNotfoundComponent},
   {path: '**', redirectTo: '/404'},
 
-  {path: 'admin', component: MainComponent},
-  
 ];
 
 @NgModule({

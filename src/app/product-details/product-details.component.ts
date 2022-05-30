@@ -103,7 +103,7 @@ export class ProductDetailsComponent implements OnInit {
           return Swal.fire({
             icon: 'info',
             title: 'Thông báo',
-            text: 'Sản phẩm đã được thêm vào giỏ hàng.',
+            text: 'Sản phẩm đã được thêm vào giỏ hàng',
             confirmButtonText: 'Xác nhận',
             confirmButtonColor: 'black'
           }).then((result) => {
@@ -129,7 +129,7 @@ export class ProductDetailsComponent implements OnInit {
         return Swal.fire({
           icon: 'info',
           title: 'Thông báo',
-          text: 'Bạn chưa chọn size',
+          text: 'Bạn chưa chọn kích cỡ',
           confirmButtonText: 'Xác nhận',
           confirmButtonColor: 'black'
         })

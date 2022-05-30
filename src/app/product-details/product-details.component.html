@@ -68,7 +68,7 @@
               [ngClass]="{'active-button-size': selected == idx}" [disabled]="instock[idx]=='0'">{{size}}</button>
           </div>
 
-          <small>
+          <small *ngIf="status">
             <p>Còn {{stock}} sản phẩm.</p>
           </small>
 

@@ -2,7 +2,7 @@
     <div class="container">
         <a class="navbar-brand font-weight-bold" routerLink="/">NNN</a>
 
-        <li class="list-inline-item navbar-toggler">
+        <li class="list-inline-item navbar-toggler" *ngIf="isLoggedIn">
             <a routerLink="/cart">
                 <i class="tf-ion-android-cart"></i>
             </a>
@@ -36,7 +36,7 @@
                     </a>
                 </li>
                 <li class="nav-item" *ngIf="showAdminBoard">
-                    <a routerLink="/admin" class="nav-link" routerLink="admin">Admin</a>
+                    <a routerLink="/admin" class="nav-link">Admin</a>
                 </li>
             </ul>
         </div>
