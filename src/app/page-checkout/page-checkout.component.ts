@@ -165,7 +165,7 @@ export class PageCheckoutComponent implements OnInit {
         return r;
       }, []))
       for (let i = 0; i < this.newList.length; i++) {
-        let priceofOne = this.newList[i].quantity * this.newList[i].product.prodprice;
+        let priceofOne = this.newList[i].quantity * (this.newList[i].product.prodprice - (this.newList[i].product.prodprice * (this.newList[i].product.proddiscount / 100)));
         this.total += priceofOne
       }
       this.getTransferFee();

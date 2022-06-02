@@ -15,11 +15,19 @@ export class ProductDetailsComponent implements OnInit {
   selected: any;
   id: any;
   user_id: any;
-  details: any;
   prodname: any;
   sku: any;
   type: any;
-  price: any;
+  price: number[]=[];
+  price_selected = 0;
+  discount:number[]=[];
+  discount_selected = 0;
+  only_price:any;
+  only_discount:any;
+  show = false;
+  same = false;
+  discount_show = false;
+  price_show = false;
   cate: any;
   img_one: any;
   img_two: any;
@@ -32,6 +40,9 @@ export class ProductDetailsComponent implements OnInit {
   check = false;
   stock: any;
   quantity = 1;
+  
+  min = 0;
+  max = 0;
   constructor(private route: ActivatedRoute, private tokenStorageService: TokenStorageService, private router: Router, private prodService: ProductService, private cartService: CartService) {
     this.id = this.route.snapshot.paramMap.get('id');
   }
@@ -44,30 +55,37 @@ export class ProductDetailsComponent implements OnInit {
 
   getProdDetails() {
     this.prodService.getDetails(this.id).subscribe(res => {
-      this.details = res;
       this.prodname = res['prodname'];
       this.sku = res['sku'];
-      this.price = res['prodprice'];
+      this.only_price = res['prodprice'];
+      this.only_discount = res['proddiscount'];
+    
       this.type = res['prodtype'];
       if (this.cate = res['categories']['catname'] == 'Men') {
         this.cate = 'Nam'
       } else {
         this.cate = 'Nữ'
       }
+
       if (res['prodimg1']) {
         this.img_one = 'assets/images/' + res['prodimg1'];
       }
       if (res['prodimg2']) {
         this.img_two = 'assets/images/' + res['prodimg2'];
       }
+
       this.description = res['proddescription'];
       this.color = res['prodcolor'];
+
       if (res['prodstatus'] == 0) {
         this.status = false
       } else {
         this.status = true
       }
+
       this.getSizes();
+      this.getPrice();
+      
     })
   }
 
@@ -79,11 +97,42 @@ export class ProductDetailsComponent implements OnInit {
       })
     })
   }
+
+  getPrice() {
+    this.prodService.getPrice(this.sku).subscribe(res => {
+      Object.keys(res).forEach(r => {
+        this.price.push(res[r].split(',')[0]);
+        this.discount.push(res[r].split(',')[1]);
+      })
+    this.min = this.discount.reduce((a, b)=>Math.min(a, b)); 
+    this.max = this.discount.reduce((a, b)=>Math.max(a, b));
+    if(this.min == this.max){
+      this.same = true;
+    }else{
+      this.same = false;
+    }
+    })
+  }
+
   click(i: any, size: any) {
     this.selected = i;
-    this.stock = this.instock[i];
     this.check = true;
     this.size_selected = size;
+
+    this.stock = this.instock[i];
+    this.price_selected = this.price[i];
+    this.discount_selected = this.discount[i];
+
+    if(this.price_selected != this.discount_selected){
+      this.show = true;
+      this.discount_show = true;
+      this.price_show = false;
+    }else{
+      this.show = true;
+      this.price_show = true;
+      this.discount_show = false;
+    }
+    
   }
 
   checkSize() {

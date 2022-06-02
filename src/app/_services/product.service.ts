@@ -27,7 +27,11 @@ export class ProductService {
   }
 
   getSizes(sku: any) {
-    return this.http.get<any>(API_URL + 'product-details-sku/' + sku);
+    return this.http.get<any>(API_URL + 'product-sizes-sku/' + sku);
+  }
+
+  getPrice(sku: any) {
+    return this.http.get<any>(API_URL + 'product-price-sku/' + sku);
   }
 
   getNewProds(){

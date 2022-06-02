@@ -12,4 +12,5 @@ export class Product {
     prodimg1?:any;
     prodimg2?:any;
     prodcolor?:any;
+    proddiscount?:any;
 }

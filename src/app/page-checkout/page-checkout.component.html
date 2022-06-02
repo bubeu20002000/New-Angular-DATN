@@ -154,7 +154,7 @@
                             <p>{{idx+1}})</p>
                             <p>{{item.product.prodname}} - {{item.product.prodsize}}</p>
                             <div class="media-body text-right">
-                                <p class="h5">{{item.quantity}} x {{item.product.prodprice |number}}đ</p>
+                                <p class="h5">{{item.quantity}} x {{item.product.prodprice - (item.product.prodprice * (item.product.proddiscount/100)) |number}}đ</p>
                             </div>
                         </div>
                         <hr>

@@ -57,7 +57,7 @@
 
                                     <td class="product-price">
                                         <span class="amount"><span class="currencySymbol">
-                                            </span>{{item.product.prodprice | number}}đ</span>
+                                            </span>{{item.product.prodprice - (item.product.prodprice * (item.product.proddiscount/100)) | number}}đ</span>
                                     </td>
 
                                     <td class="product-quantity">
@@ -70,7 +70,7 @@
 
                                     <td class="product-subtotal">
                                         <span class="amount"><span class="currencySymbol">
-                                            </span>{{item.product.prodprice*item.quantity | number}}đ</span>
+                                            </span>{{(item.product.prodprice - (item.product.prodprice * (item.product.proddiscount/100)))*item.quantity | number}}đ</span>
                                     </td>
                                     <td class="product-remove">
                                         <button class="btn-black remove pointer"

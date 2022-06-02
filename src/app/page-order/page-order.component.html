@@ -80,7 +80,7 @@
                 <th scope="row">#{{idx+1}}</th>
                 <td>{{item.product.prodname}}</td>
                 <td>{{item.product.prodsize}}</td>
-                <td>{{item.product.prodprice | number}} đ</td>
+                <td>{{item.product.prodprice - (item.product.prodprice * (item.product.proddiscount/100)) | number}} đ</td>
                 <td>{{item.quantity}}</td>
               </tr>
             </tbody>

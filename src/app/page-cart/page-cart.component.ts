@@ -11,7 +11,7 @@ import { TokenStorageService } from '../_services/token-storage.service';
 })
 export class PageCartComponent implements OnInit {
 
-  constructor(private router:Router,private route: ActivatedRoute, private cartService: CartService, private tokenStorageService: TokenStorageService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private cartService: CartService, private tokenStorageService: TokenStorageService) { }
 
   data: any;
   newList: any;
@@ -45,7 +45,7 @@ export class PageCartComponent implements OnInit {
         return r;
       }, []))
       for (let i = 0; i < this.newList.length; i++) {
-        let priceofOne = this.newList[i].quantity * this.newList[i].product.prodprice;
+        let priceofOne = this.newList[i].quantity * (this.newList[i].product.prodprice - (this.newList[i].product.prodprice * (this.newList[i].product.proddiscount / 100)));
         this.total += priceofOne
         if (this.newList[i]['status'] == 0) {
           this.continue = true;
@@ -54,15 +54,8 @@ export class PageCartComponent implements OnInit {
         }
       }
       this.getTransferFree();
-      
-
     })
-
   }
-
-  // checkout(){
-  //   this.router.navigate(['check-out'], {relativeTo:this.route});
-  // }
 
   delItem(id: any, name: any) {
     Swal.fire({

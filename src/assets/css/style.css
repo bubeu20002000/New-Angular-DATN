@@ -1077,6 +1077,21 @@ a.text-primary:hover {
   letter-spacing: .5px;
 }
 
+.on_sale {
+  background: #0f8633;
+  display: inline-block;
+  color: #fff;
+  position: absolute;
+  top: 50px;
+  right: 0px;
+  padding: 5px 10px;
+  text-align: center;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: .5px;
+}
+
 .products-main .product-hover-overlay .btn, .products-shop .product-hover-overlay .btn {
   font-size: 14px;
   padding: 10px 29px;

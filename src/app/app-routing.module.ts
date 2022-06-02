@@ -18,6 +18,10 @@ import { MainComponent } from './_admin/main/main.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { PageAboutComponent } from './page-about/page-about.component';
 import { PageOrderSuccessComponent } from './page-order-success/page-order-success.component';
+import { DashboardComponent } from './_admin/dashboard/dashboard.component';
+import { UsersComponent } from './_admin/users/users.component';
+import { ProductsComponent } from './_admin/products/products.component';
+import { OrdersComponent } from './_admin/orders/orders.component';
 
 const routes: Routes = [
   { path:"", component:PageHomeComponent},
@@ -40,7 +44,13 @@ const routes: Routes = [
 
   { path:"about", component:PageAboutComponent},
 
-  {path: 'admin', component: MainComponent},
+  {path: 'admin', component: MainComponent, children:[
+    {path: '',pathMatch:'full',redirectTo:'dashboard'},
+    {path: 'dashboard', component: DashboardComponent},
+    {path: 'users', component: UsersComponent},
+    {path: 'products', component: ProductsComponent},
+    {path: 'orders', component: OrdersComponent},
+  ]},
 
   {path: '404', component: PageNotfoundComponent},
   {path: '**', redirectTo: '/404'},

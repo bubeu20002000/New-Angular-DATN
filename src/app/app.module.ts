@@ -41,6 +41,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DialogimgComponent } from './_helpers/dialogimg/dialogimg.component';
 import { DatePipe } from '@angular/common';
 import { PageOrderSuccessComponent } from './page-order-success/page-order-success.component';
+import { DashboardComponent } from './_admin/dashboard/dashboard.component';
+import { UsersComponent } from './_admin/users/users.component';
+import { ProductsComponent } from './_admin/products/products.component';
+import { OrdersComponent } from './_admin/orders/orders.component';
+import { MatTableModule } from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { TruncatePipe } from './_pipe/truncate.pipe';
 
 
 @NgModule({
@@ -68,6 +75,11 @@ import { PageOrderSuccessComponent } from './page-order-success/page-order-succe
     PageAboutComponent,
     DialogimgComponent,
     PageOrderSuccessComponent,
+    DashboardComponent,
+    UsersComponent,
+    ProductsComponent,
+    OrdersComponent,
+    TruncatePipe,
 
   ],
   imports: [
@@ -86,7 +98,9 @@ import { PageOrderSuccessComponent } from './page-order-success/page-order-succe
     MatButtonModule,
     MatRadioModule,
     MatCheckboxModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule,
+    MatPaginatorModule,
   ],
   providers: [authInterceptorProviders, DatePipe],
   bootstrap: [AppComponent]

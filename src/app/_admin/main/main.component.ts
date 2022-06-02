@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/_services/user.service';
 
 @Component({
@@ -8,19 +9,10 @@ import { UserService } from 'src/app/_services/user.service';
 })
 export class MainComponent implements OnInit {
 
-  content?: string;
-
-  constructor(private userService: UserService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    // this.userService.getAdminBoard().subscribe(
-    //   data => {
-    //     this.content = data;
-    //   },
-    //   err => {
-    //     this.content = JSON.parse(err.error).message;
-    //   }
-    // );
+    
   }
 
 }

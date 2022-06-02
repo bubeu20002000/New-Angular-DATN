@@ -55,17 +55,24 @@
           </div>
 
           <hr>
-
-          <h3 class="product-price">{{price | number}} đ</h3>
+          <h3 *ngIf="!show && !discount_show && !price_show && !same" class="product-price">{{min|number}}đ - {{max|number}}đ</h3>
+          <h3 *ngIf="!show && !discount_show && !price_show && same" class="product-price">{{only_price-(only_price*(only_discount/100))|number}}đ<del class="pl-3" *ngIf="!show && !discount_show && !price_show ">{{only_price| number}}đ</del></h3>
+          <!-- <h3 class="product-price" *ngIf="discount_show && status">{{price - price*(discount/100) |
+            number}}đ<del class="pl-2">{{price | number}}đ </del></h3>
+          <h3 class="product-price" *ngIf="!discount_show && status">{{price | number}}đ</h3> -->
+          <h3 class="product-price" *ngIf="!price_show && discount_show && show">{{discount_selected|
+            number}}đ<del class="pl-3">{{price_selected| number}}đ</del></h3>
+          <h3 class="product-price" *ngIf="price_show && !discount_show && show">{{price_selected| number}}đ</h3>
 
           <p class="product-description my-4 ">
             {{description}}
           </p>
 
-          <div class="product-size d-flex align-items-center mt-4" *ngIf="status">
+          <div class="product-size d-flex align-items-center mt-4">
             <span class="font-weight-bold text-capitalize product-meta-title">Kích cỡ:</span>
-            <button class="btn btn-small btn-black mr-2" *ngFor="let size of size;let idx = index" (click)="click(idx,size)"
-              [ngClass]="{'active-button-size': selected == idx}" [disabled]="instock[idx]=='0'">{{size}}</button>
+            <button class="btn btn-small btn-black mr-2" *ngFor="let size of size;let idx = index"
+              (click)="click(idx,size)" [ngClass]="{'active-button-size': selected == idx}"
+              [disabled]="instock[idx]=='0'">{{size}}</button>
           </div>
 
           <small *ngIf="status">
@@ -80,9 +87,9 @@
               <a class="btn btn-main btn-small" (click)="isLogged()">Thêm vào giỏ</a>
             </div>
           </form>
-          <div>
+          <!-- <div>
             <a class="btn btn-main mt-4" *ngIf="!status">Hết hàng</a>
-          </div>
+          </div> -->
 
           <div class="products-meta mt-4">
             <div class="product-category d-flex align-items-center">

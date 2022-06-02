@@ -1,0 +1,57 @@
+<div class="m-3">
+    <mat-form-field appearance="standard">
+        <mat-label>Tìm kiếm</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Tìm kiếm theo tên, email,..." #input>
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="index">
+            <th mat-header-cell *matHeaderCellDef>STT</th>
+            <td mat-cell *matCellDef="let element; let i = index;"><strong>{{i+1}}</strong></td>
+        </ng-container>
+
+        <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef>Tên tài khoản</th>
+            <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="phone_number">
+            <th mat-header-cell *matHeaderCellDef> Số điện thoại </th>
+            <td mat-cell *matCellDef="let element"> {{element.phone_number}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="address_1">
+            <th mat-header-cell *matHeaderCellDef> Địa chỉ </th>
+            <td mat-cell *matCellDef="let element"> {{element.address_1}} </td>
+        </ng-container>
+        <ng-container matColumnDef="city">
+            <th mat-header-cell *matHeaderCellDef> Thành phố </th>
+            <td mat-cell *matCellDef="let element"> {{element.city}} </td>
+        </ng-container>
+        <ng-container matColumnDef="district">
+            <th mat-header-cell *matHeaderCellDef> Quận </th>
+            <td mat-cell *matCellDef="let element"> {{element.district}} </td>
+        </ng-container>
+        <ng-container matColumnDef="ward">
+            <th mat-header-cell *matHeaderCellDef> Phường </th>
+            <td mat-cell *matCellDef="let element"> {{element.ward}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">Không có dữ liệu nào phù hợp với từ khóa "{{input.value}}"</td>
+        </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons 
+                 >
+    </mat-paginator>
+</div>

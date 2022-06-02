@@ -1,0 +1,83 @@
+<div class="m-3">
+    <mat-form-field appearance="standard">
+        <mat-label>Tìm kiếm</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Tìm kiếm theo tên, sku,..." #input>
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="index">
+            <th mat-header-cell *matHeaderCellDef>STT</th>
+            <td mat-cell *matCellDef="let element; let i = index;"><strong>{{i+1}}</strong></td>
+        </ng-container>
+
+        <ng-container matColumnDef="sku">
+            <th mat-header-cell *matHeaderCellDef>SKU</th>
+            <td mat-cell *matCellDef="let element"> {{element.sku}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="prodname">
+            <th mat-header-cell *matHeaderCellDef> Tên sản phẩm </th>
+            <td mat-cell *matCellDef="let element"> {{element.prodname}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="prodtype">
+            <th mat-header-cell *matHeaderCellDef> Loại sản phẩm </th>
+            <td mat-cell *matCellDef="let element"> {{element.prodtype}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="prodcolor">
+            <th mat-header-cell *matHeaderCellDef> Màu sắc</th>
+            <td mat-cell *matCellDef="let element"> {{element.prodcolor|truncate:10}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="prodsize">
+            <th mat-header-cell *matHeaderCellDef> Kích cỡ </th>
+            <td mat-cell *matCellDef="let element"> {{element.prodsize}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="prodinstock">
+            <th mat-header-cell *matHeaderCellDef style="text-align:center;"> Số lượng </th>
+            <td mat-cell *matCellDef="let element" style="text-align:center;"> {{element.prodinstock}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="prodprice">
+            <th mat-header-cell *matHeaderCellDef> Giá </th>
+            <td mat-cell *matCellDef="let element"> {{element.prodprice|number}}đ</td>
+        </ng-container>
+
+        <ng-container matColumnDef="prodstatus">
+            <th mat-header-cell *matHeaderCellDef> Tình trạng </th>
+            <td mat-cell *matCellDef="let element"> {{element.prodstatus}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="proddescription">
+            <th mat-header-cell *matHeaderCellDef> Giới thiệu </th>
+            <td mat-cell *matCellDef="let element"> {{element.proddescription | truncate:20}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="prodimg1">
+            <th mat-header-cell *matHeaderCellDef> Hình ảnh 1 </th>
+            <td mat-cell *matCellDef="let element"> {{element.prodimg1 |truncate:10}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="prodimg2">
+            <th mat-header-cell *matHeaderCellDef> Hình ảnh 2 </th>
+            <td mat-cell *matCellDef="let element"> {{element.prodimg2 |truncate:10}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="proddiscount">
+            <th mat-header-cell *matHeaderCellDef> Giảm giá % </th>
+            <td mat-cell *matCellDef="let element"> {{element.proddiscount}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">Không có dữ liệu nào phù hợp với từ khóa "{{input.value}}"</td>
+        </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+    </mat-paginator>
+</div>

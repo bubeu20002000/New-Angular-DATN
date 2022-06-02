@@ -31,6 +31,8 @@ export class ProductAllComponent implements OnInit {
   info: any;
   aval_size: any;
 
+  show_discount = false;
+
   genders: FormGroup;
   types: FormGroup;
   constructor(private prodService: ProductService, private fb: FormBuilder, public dialog: MatDialog) {
@@ -78,6 +80,7 @@ export class ProductAllComponent implements OnInit {
             let totalItems = response['totalItems'];
             this.products = prods;
             this.count = totalItems;
+
           } else {
             Swal.fire({
               icon: 'error',
