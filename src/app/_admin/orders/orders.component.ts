@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { DialoginfoorderComponent } from 'src/app/_helpers/dialoginfoorder/dialoginfoorder.component';
+import { AdminService } from 'src/app/_services/admin.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-orders',
@@ -7,9 +13,84 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrdersComponent implements OnInit {
 
-  constructor() { }
+
+  dataUF: any;
+  dataDN: any;
+  dataSourceUF: any;
+  dataSourceDN: any;
+  searchTextUF: any;
+  searchTextDN: any;
+  displayedColumns: string[] = ['index', 'id', 'name', 'email', 'date', 'phone', 'total', 'status', 'paymentmethod','actions'];
+  displayedColumns2: string[] = ['index', 'id', 'name', 'email', 'date', 'phone', 'total', 'status', 'paymentmethod'];
+  @ViewChild(MatPaginator) paginator?: MatPaginator;
+  constructor(private adminService: AdminService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.getAllOrderUF()
+    this.getAllOrderDN()
+  }
+
+  getAllOrderUF() {
+    this.adminService.getAllOrdersUnfinish().subscribe(res => {
+      this.dataUF = res;
+      this.dataSourceUF = new MatTableDataSource(this.dataUF);
+      this.dataSourceUF.paginator = this.paginator;
+    })
+  }
+
+  getAllOrderDN() {
+    this.adminService.getAllOrdersDone().subscribe(res => {
+      this.dataDN = res;
+      this.dataSourceDN = new MatTableDataSource(this.dataDN);
+      this.dataSourceDN.paginator = this.paginator;
+    })
+  }
+
+  applyFilterUF(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSourceUF.filter = filterValue.trim().toLowerCase();
+  }
+  applyFilterDN(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSourceDN.filter = filterValue.trim().toLowerCase();
+  }
+
+  openDialog(id: any, name: any, user: any, email: any, date: any, phone: any, address1: any, city: any, district: any, ward: any, total: any, status: any, paymentmethod: any) {
+    this.dialog.open(DialoginfoorderComponent, {
+      data: {
+        id: id,
+        name: name,
+        user: user,
+        email: email,
+        date: date,
+        phone: phone,
+        address1: address1,
+        city: city,
+        district: district,
+        ward: ward,
+        total: total,
+        status: status,
+        paymentmethod: paymentmethod
+      }
+    })
+  }
+
+  updateOrder(id:any){
+    Swal.fire({
+      icon: 'info',
+      title: 'Thông báo',
+      text: 'Bạn có chắc chắn đơn hàng đã được thanh toán?',
+      confirmButtonText: 'Xác nhận',
+      confirmButtonColor: 'black',
+      showCancelButton: true,
+      cancelButtonText:'Không'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.adminService.updateOrder(id).subscribe();
+        window.location.reload();
+      }
+    })
+    
   }
 
 }

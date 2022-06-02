@@ -13,7 +13,7 @@ export class ProductsComponent implements OnInit {
   data: any;
   dataSource: any;
   searchText: any;
-  displayedColumns: string[] = ['index', 'sku', 'prodname', 'prodtype', 'prodsize', 'prodcolor', 'prodprice', 'prodinstock', 'prodstatus', 'proddiscount', 'prodimg1', 'prodimg2', 'proddescription'];
+  displayedColumns: string[] = ['index', 'sku', 'prodname', 'prodtype','categories', 'prodsize', 'prodcolor', 'prodprice', 'prodinstock', 'prodstatus', 'proddiscount', 'prodimg1', 'prodimg2', 'proddescription'];
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   constructor(private adminService: AdminService) { }
 

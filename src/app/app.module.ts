@@ -48,6 +48,7 @@ import { OrdersComponent } from './_admin/orders/orders.component';
 import { MatTableModule } from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { TruncatePipe } from './_pipe/truncate.pipe';
+import { DialoginfoorderComponent } from './_helpers/dialoginfoorder/dialoginfoorder.component';
 
 
 @NgModule({
@@ -80,6 +81,7 @@ import { TruncatePipe } from './_pipe/truncate.pipe';
     ProductsComponent,
     OrdersComponent,
     TruncatePipe,
+    DialoginfoorderComponent,
 
   ],
   imports: [

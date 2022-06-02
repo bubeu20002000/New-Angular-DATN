@@ -1,0 +1,14 @@
+<p class="h5" style="text-align: center;">Chi tiết đơn hàng</p>
+<p><strong>Mã đơn hàng:</strong> #{{data.id}}</p>
+<p><strong>Tên khách hàng:</strong> {{data.name}}</p>
+<p><strong>Tên tài khoản:</strong> {{data.user}}</p>
+<p><strong>Email:</strong> {{data.email}}</p>
+<p><strong>Ngày đặt:</strong> {{data.date}}</p>
+<p><strong>Tổng:</strong> {{data.total|number}}đ</p>
+<p><strong>Cách thanh toán:</strong> {{data.paymentmethod==1?'Ngân hàng':'COD'}}</p>
+<p><strong>SĐT:</strong> {{data.phone}}</p>
+<p><strong>Địa chỉ:</strong> {{data.address1}}</p>
+<p><strong>Thành phố:</strong> {{data.city}}</p>
+<p><strong>Quận:</strong> {{data.district}}</p>
+<p><strong>Phường:</strong> {{data.ward}}</p>
+<p><strong>Hiện trạng:</strong> {{data.status==1?'Đang xử lý':'Hoàn thành'}}</p>

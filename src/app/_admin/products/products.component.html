@@ -28,7 +28,7 @@
 
         <ng-container matColumnDef="prodcolor">
             <th mat-header-cell *matHeaderCellDef> Màu sắc</th>
-            <td mat-cell *matCellDef="let element"> {{element.prodcolor|truncate:10}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.prodcolor|truncate:7}} </td>
         </ng-container>
 
         <ng-container matColumnDef="prodsize">
@@ -48,27 +48,32 @@
 
         <ng-container matColumnDef="prodstatus">
             <th mat-header-cell *matHeaderCellDef> Tình trạng </th>
-            <td mat-cell *matCellDef="let element"> {{element.prodstatus}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.prodstatus == true?'Còn':'Liên hệ'}} </td>
         </ng-container>
 
         <ng-container matColumnDef="proddescription">
             <th mat-header-cell *matHeaderCellDef> Giới thiệu </th>
-            <td mat-cell *matCellDef="let element"> {{element.proddescription | truncate:20}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.proddescription | truncate:10}} </td>
         </ng-container>
 
         <ng-container matColumnDef="prodimg1">
             <th mat-header-cell *matHeaderCellDef> Hình ảnh 1 </th>
-            <td mat-cell *matCellDef="let element"> {{element.prodimg1 |truncate:10}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.prodimg1 |truncate:7}} </td>
         </ng-container>
 
         <ng-container matColumnDef="prodimg2">
             <th mat-header-cell *matHeaderCellDef> Hình ảnh 2 </th>
-            <td mat-cell *matCellDef="let element"> {{element.prodimg2 |truncate:10}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.prodimg2 |truncate:7}} </td>
         </ng-container>
 
         <ng-container matColumnDef="proddiscount">
             <th mat-header-cell *matHeaderCellDef> Giảm giá % </th>
             <td mat-cell *matCellDef="let element"> {{element.proddiscount}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="categories">
+            <th mat-header-cell *matHeaderCellDef> Giới tính </th>
+            <td mat-cell *matCellDef="let element"> {{element.categories.catid == 1?'Nam':'Nữ'}} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

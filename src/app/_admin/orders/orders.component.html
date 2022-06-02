@@ -1,1 +1,224 @@
-<p>orders works!</p>
+<!-- UF -->
+<div class="m-3 card p-3">
+    <h2>Đơn hàng chưa xử lý</h2>
+    <mat-form-field appearance="standard" style="width: 180px;">
+        <mat-label>Tìm kiếm</mat-label>
+        <input matInput (keyup)="applyFilterUF($event)" placeholder="Tìm kiếm theo tên, mã,..." #input>
+    </mat-form-field>
+    <table mat-table [dataSource]="dataSourceUF" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="index">
+            <th mat-header-cell *matHeaderCellDef>STT</th>
+            <td mat-cell *matCellDef="let element; let i = index;"><strong>{{i+1}}</strong></td>
+        </ng-container>
+
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>Mã ĐH</th>
+            <td mat-cell *matCellDef="let element"> #{{element.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Tên KH </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="user">
+            <th mat-header-cell *matHeaderCellDef> Tên TK </th>
+            <td mat-cell *matCellDef="let element"> {{element.user.username}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email</th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef> Ngày đặt </th>
+            <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="phone">
+            <th mat-header-cell *matHeaderCellDef> SĐT </th>
+            <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="address1">
+            <th mat-header-cell *matHeaderCellDef> ĐC 1 </th>
+            <td mat-cell *matCellDef="let element"> {{element.address1}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="address2">
+            <th mat-header-cell *matHeaderCellDef> ĐC 2 </th>
+            <td mat-cell *matCellDef="let element"> {{element.address2}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="city">
+            <th mat-header-cell *matHeaderCellDef> Thành phố </th>
+            <td mat-cell *matCellDef="let element"> {{element.city}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="district">
+            <th mat-header-cell *matHeaderCellDef> Quận </th>
+            <td mat-cell *matCellDef="let element"> {{element.district}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="ward">
+            <th mat-header-cell *matHeaderCellDef> Phường </th>
+            <td mat-cell *matCellDef="let element"> {{element.ward}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="zipcode">
+            <th mat-header-cell *matHeaderCellDef> Zip code </th>
+            <td mat-cell *matCellDef="let element"> {{element.zipcode}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="note">
+            <th mat-header-cell *matHeaderCellDef> Lời nhắn </th>
+            <td mat-cell *matCellDef="let element"> {{element.note}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="total">
+            <th mat-header-cell *matHeaderCellDef> Tổng </th>
+            <td mat-cell *matCellDef="let element"> {{element.total|number}}đ </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef> Hiện trạng </th>
+            <td mat-cell *matCellDef="let element"> {{element.status==1?'Đang xử lý':'Hoàn thành'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="paymentmethod">
+            <th mat-header-cell *matHeaderCellDef> Cách TT </th>
+            <td mat-cell *matCellDef="let element"> {{element.paymentmethod==1?'Ngân hàng':'COD'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Hành động </th>
+            <td mat-cell *matCellDef="let row"> <button class="btn-black mr-2" (click)="updateOrder(row.id)">Hoàn
+                    tất</button> <button class="btn-black"
+                    (click)="openDialog(row.id,row.name,row.user.username,row.email,row.date,row.phone,row.address1,row.city,row.district,row.ward,row.total,row.status,row.paymentmethod)">Chi
+                    tiết</button> </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+        </tr>
+
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">Không có dữ liệu nào phù hợp với từ khóa "{{input.value}}"</td>
+        </tr>
+
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+    </mat-paginator>
+</div>
+
+<!-- DN -->
+<div class="m-3 card p-3">
+    <h2>Đơn hàng đã xử lý xong</h2>
+    <mat-form-field appearance="standard" style="width: 180px;">
+        <mat-label>Tìm kiếm</mat-label>
+        <input matInput (keyup)="applyFilterDN($event)" placeholder="Tìm kiếm theo tên, mã,..." #input>
+    </mat-form-field>
+    <br>
+    <small>Lưu ý: Nhấn từng dòng để hiển thị chi tiết đơn hàng</small>
+    <table mat-table [dataSource]="dataSourceDN" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="index">
+            <th mat-header-cell *matHeaderCellDef>STT</th>
+            <td mat-cell *matCellDef="let element; let i = index;"><strong>{{i+1}}</strong></td>
+        </ng-container>
+
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>Mã ĐH</th>
+            <td mat-cell *matCellDef="let element"> #{{element.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Tên KH </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="user">
+            <th mat-header-cell *matHeaderCellDef> Tên TK </th>
+            <td mat-cell *matCellDef="let element"> {{element.user.username}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email</th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef> Ngày đặt </th>
+            <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="phone">
+            <th mat-header-cell *matHeaderCellDef> SĐT </th>
+            <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="address1">
+            <th mat-header-cell *matHeaderCellDef> ĐC 1 </th>
+            <td mat-cell *matCellDef="let element"> {{element.address1}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="address2">
+            <th mat-header-cell *matHeaderCellDef> ĐC 2 </th>
+            <td mat-cell *matCellDef="let element"> {{element.address2}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="city">
+            <th mat-header-cell *matHeaderCellDef> Thành phố </th>
+            <td mat-cell *matCellDef="let element"> {{element.city}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="district">
+            <th mat-header-cell *matHeaderCellDef> Quận </th>
+            <td mat-cell *matCellDef="let element"> {{element.district}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="ward">
+            <th mat-header-cell *matHeaderCellDef> Phường </th>
+            <td mat-cell *matCellDef="let element"> {{element.ward}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="zipcode">
+            <th mat-header-cell *matHeaderCellDef> Zip code </th>
+            <td mat-cell *matCellDef="let element"> {{element.zipcode}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="note">
+            <th mat-header-cell *matHeaderCellDef> Lời nhắn </th>
+            <td mat-cell *matCellDef="let element"> {{element.note}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="total">
+            <th mat-header-cell *matHeaderCellDef> Tổng </th>
+            <td mat-cell *matCellDef="let element"> {{element.total|number}}đ </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef> Hiện trạng </th>
+            <td mat-cell *matCellDef="let element"> {{element.status==1?'Đang xử lý':'Hoàn thành'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="paymentmethod">
+            <th mat-header-cell *matHeaderCellDef> Cách TT </th>
+            <td mat-cell *matCellDef="let element"> {{element.paymentmethod==1?'Ngân hàng':'COD'}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns2;"
+            (click)="openDialog(row.id,row.name,row.user.username,row.email,row.date,row.phone,row.address1,row.city,row.district,row.ward,row.total,row.status,row.paymentmethod)">
+        </tr>
+
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">Không có dữ liệu nào phù hợp với từ khóa "{{input.value}}"</td>
+        </tr>
+
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+    </mat-paginator>
+</div>
