@@ -1,0 +1,14 @@
+<p class="h5" style="text-align: center;">Chi tiết sản phẩm</p>
+<p><strong>Mã SKU:</strong> {{data.sku}}</p>
+<p><strong>Tên sản phẩm:</strong> {{data.prodname}}</p>
+<p><strong>Loại giày:</strong> {{data.prodtype}}</p>
+<p><strong>Màu:</strong> {{data.prodcolor}}</p>
+<p><strong>Kích cỡ:</strong> {{data.prodsize}}</p>
+<p><strong>Số lượng:</strong> {{data.prodinstock}}</p>
+<p><strong>Giá:</strong> {{data.prodprice|number}}đ</p>
+<p><strong>Tình trạng:</strong> {{data.prodstatus==1?'Còn':'Liên hệ'}}</p>
+<p><strong>Giới thiệu:</strong> {{data.proddescription}}</p>
+<p><strong>Ảnh:</strong><img src="assets/images/{{data.prodimg1}}" width="200px" height="200px"> <img
+        src="assets/images/{{data.prodimg2}}" width="200px" height="200px"></p>
+<p><strong>Giảm giá %:</strong> {{data.proddiscount}}</p>
+<p><strong>Giới tính:</strong> {{data.categories.catid==1?'Nam':'Nữ'}}</p>

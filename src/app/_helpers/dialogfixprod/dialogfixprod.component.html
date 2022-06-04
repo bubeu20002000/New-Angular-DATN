@@ -1,0 +1,102 @@
+<form [formGroup]="formFix">
+    <div class="form-group row">
+        <label>SKU<strong style="color: red;">*</strong>: </label>
+        <input type="text" class="form-control" formControlName="sku" [ngClass]="{'is-invalid': f.sku.errors && f.sku.touched}">
+        <div *ngIf="f.sku.errors" class="invalid-feedback">
+            <div *ngIf="f.sku.errors.required">SKU không được để trống</div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label>Tên sản phẩm<strong style="color: red;">*</strong>: </label>
+        <input type="text" class="form-control" formControlName="prodname" [ngClass]="{'is-invalid': f.prodname.errors && f.prodname.touched}">
+        <div *ngIf="f.prodname.errors" class="invalid-feedback">
+            <div *ngIf="f.prodname.errors.required">Tên sản phẩm không được để trống</div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label>Loại giày<strong style="color: red;">*</strong>: </label>
+        <select formControlName="prodtype">
+            <option [value]="data.prodtype" selected disabled>{{data.prodtype}}</option>
+            <option value="Oxfords And Derbies" >Oxfords And Derbies</option>
+            <option value="Mules" >Mules</option>
+            <option value="Flats" >Flats</option>
+            <option value="Boats" >Boats</option>
+            <option value="Loafers" >Loafers</option>
+            <option value="Sneakers" >Sneakers</option>
+        </select>
+    </div>
+    <div class="form-group row">
+        <label>Màu sắc<strong style="color: red;">*</strong>: </label>
+        <input type="text" class="form-control" formControlName="prodcolor" [ngClass]="{'is-invalid': f.prodcolor.errors && f.prodcolor.touched}">
+        <div *ngIf="f.prodcolor.errors" class="invalid-feedback">
+            <div *ngIf="f.prodcolor.errors.required">Màu không được để trống</div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label>Kích cỡ<strong style="color: red;">*</strong>: </label>
+        <input type="text" class="form-control" formControlName="prodsize" [ngClass]="{'is-invalid': f.prodsize.errors && f.prodsize.touched}">
+        <div *ngIf="f.prodsize.errors" class="invalid-feedback">
+            <div *ngIf="f.prodsize.errors.required">Kích cỡ không được để trống</div>
+            <div *ngIf="f.prodsize.errors.pattern">Không đúng định dạng</div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label>Số lượng<strong style="color: red;">*</strong>: </label>
+        <input type="text" class="form-control" formControlName="prodinstock" [ngClass]="{'is-invalid': f.prodinstock.errors && f.prodinstock.touched}">
+        <div *ngIf="f.prodinstock.errors" class="invalid-feedback">
+            <div *ngIf="f.prodinstock.errors.required">Số lượng không được để trống</div>
+            <div *ngIf="f.prodinstock.errors.pattern">Không đúng định dạng</div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label>Giá (đ)<strong style="color: red;">*</strong>: </label>
+        <input type="text" class="form-control" formControlName="prodprice" [ngClass]="{'is-invalid': f.prodprice.errors && f.prodprice.touched}">
+        <div *ngIf="f.prodprice.errors" class="invalid-feedback">
+            <div *ngIf="f.prodprice.errors.required">Giá không được để trống</div>
+            <div *ngIf="f.prodprice.errors.pattern">Không đúng định dạng</div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label>Tình trạng<strong style="color: red;">*</strong>: </label>
+        <select formControlName="prodstatus">
+            <option [value]="data.prodstatus" selected disabled>{{data.prodstatus==1?'Còn':'Liên hệ'}}</option>
+            <option value=true>Còn</option>
+            <option value=false>Liên hệ</option>
+        </select>
+    </div>
+    <div class="form-group row">
+        <label>Giới thiệu<strong style="color: red;">*</strong>: </label>
+        <textarea cols="30" rows="5" formControlName="proddescription"></textarea>
+    </div>
+    <div class="form-group row">
+        <label>Ảnh 1<strong style="color: red;">*</strong>: </label>
+        <input type="text" class="form-control" formControlName="prodimg1" [ngClass]="{'is-invalid': f.prodimg1.errors && f.prodimg1.touched}">
+        <div *ngIf="f.prodimg1.errors" class="invalid-feedback">
+            <div *ngIf="f.prodimg1.errors.required">Ảnh 1 không được để trống</div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label>Ảnh 2<strong style="color: red;">*</strong>: </label>
+        <input type="text" class="form-control" formControlName="prodimg2" [ngClass]="{'is-invalid': f.prodimg2.errors && f.prodimg2.touched}">
+        <div *ngIf="f.prodimg2.errors" class="invalid-feedback">
+            <div *ngIf="f.prodimg2.errors.required">Ảnh 2 không được để trống</div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label>Giảm giá (%)<strong style="color: red;">*</strong>: </label>
+        <input type="text" class="form-control" formControlName="proddiscount" [ngClass]="{'is-invalid': f.proddiscount.errors && f.proddiscount.touched}">
+        <div *ngIf="f.proddiscount.errors" class="invalid-feedback">
+            <div *ngIf="f.proddiscount.errors.required">Giảm giá không được để trống</div>
+            <div *ngIf="f.proddiscount.errors.pattern">Không đúng định dạng</div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label>Giới tính<strong style="color: red;">*</strong>: </label>
+        <select formControlName="categories">
+            <option [value]="data.categories.catid" selected disabled>{{data.categories.catid==1?'Nam':'Nữ'}}</option>
+            <option value="1">Nam</option>
+            <option value="2">Nữ</option>
+        </select>
+    </div>
+</form>
+<button class="btn-black float-left" type="submit" (click)="Fix()" [disabled]="!formFix.valid">Sửa</button>

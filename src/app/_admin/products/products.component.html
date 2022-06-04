@@ -4,6 +4,8 @@
         <input matInput (keyup)="applyFilter($event)" placeholder="Tìm kiếm theo tên, sku,..." #input>
     </mat-form-field>
 
+    <button class="btn-black ml-4" (click)="addProd()">Thêm sản phẩm</button>
+
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
         <ng-container matColumnDef="index">
@@ -74,6 +76,17 @@
         <ng-container matColumnDef="categories">
             <th mat-header-cell *matHeaderCellDef> Giới tính </th>
             <td mat-cell *matCellDef="let element"> {{element.categories.catid == 1?'Nam':'Nữ'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Hành động </th>
+            <td mat-cell *matCellDef="let row">
+                <button class="btn-black mr-2" (click)="fixProd(row.id,row.sku,row.prodname,row.prodtype,row.prodcolor,row.prodsize,row.prodinstock,row.prodprice,row.prodstatus,row.proddescription,row.prodimg1,row.prodimg2,row.proddiscount,row.categories)">Sửa</button>
+                <button class="btn-black mr-2"
+                    (click)="openDialog(row.sku,row.prodname,row.prodtype,row.prodcolor,row.prodsize,row.prodinstock,row.prodprice,row.prodstatus,row.proddescription,row.prodimg1,row.prodimg2,row.proddiscount,row.categories)">Chi
+                    tiết</button>
+                <!-- <button class="btn-black" (click)="delProd(row.id,row.prodname)">Xóa</button> -->
+            </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

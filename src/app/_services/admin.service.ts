@@ -35,6 +35,13 @@ export class AdminService {
   updateOrder(id:any){
     return this.http.put<any>(API_URL + 'update_order/'+id,null, { headers: this.header });
   }
-  
-
+  updateProd(id:any,cid:any, data:any){
+    return this.http.put<any>(API_URL + 'update_prod/'+id+'/'+cid,data, { headers: this.header });
+  }
+  deleteProd(id:any){
+    return this.http.delete<any>(API_URL + 'delete_prod/'+id,{ headers: this.header });
+  }
+  addProd(cid:any,data:any){
+    return this.http.post<any>(API_URL + 'add_prod/'+cid,data,{ headers: this.header });
+  }
 }

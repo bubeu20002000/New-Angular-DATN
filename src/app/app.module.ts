@@ -46,11 +46,25 @@ import { UsersComponent } from './_admin/users/users.component';
 import { ProductsComponent } from './_admin/products/products.component';
 import { OrdersComponent } from './_admin/orders/orders.component';
 import { MatTableModule } from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { TruncatePipe } from './_pipe/truncate.pipe';
 import { DialoginfoorderComponent } from './_helpers/dialoginfoorder/dialoginfoorder.component';
-
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { DialoginfoprodComponent } from './_helpers/dialoginfoprod/dialoginfoprod.component';
+import { DialogfixprodComponent } from './_helpers/dialogfixprod/dialogfixprod.component';
+import { DialogaddprodComponent } from './_helpers/dialogaddprod/dialogaddprod.component';
+export const MY_FORMATS = {
+  parse: {
+      dateInput: 'LL'
+  },
+  display: {
+      dateInput: 'DD-MM-YYYY',
+      monthYearLabel: 'YYYY',
+      dateA11yLabel: 'LL',
+      monthYearA11yLabel: 'YYYY'
+  }
+};
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,7 +96,9 @@ import { DialoginfoorderComponent } from './_helpers/dialoginfoorder/dialoginfoo
     OrdersComponent,
     TruncatePipe,
     DialoginfoorderComponent,
-
+    DialoginfoprodComponent,
+    DialogfixprodComponent,
+    DialogaddprodComponent,
   ],
   imports: [
     BrowserModule,
@@ -103,8 +119,10 @@ import { DialoginfoorderComponent } from './_helpers/dialoginfoorder/dialoginfoo
     MatDialogModule,
     MatTableModule,
     MatPaginatorModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
-  providers: [authInterceptorProviders, DatePipe],
+  providers: [authInterceptorProviders, DatePipe,{ provide: MAT_DATE_LOCALE, useValue: MY_FORMATS }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

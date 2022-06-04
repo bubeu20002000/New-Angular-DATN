@@ -1,4 +1,6 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -12,7 +14,15 @@ import Swal from 'sweetalert2';
   styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit {
+  range = new FormGroup({
+    start: new FormControl(null),
+    end: new FormControl(null),
+  });
 
+  range2 = new FormGroup({
+    start: new FormControl(null),
+    end: new FormControl(null),
+  });
 
   dataUF: any;
   dataDN: any;
@@ -20,10 +30,10 @@ export class OrdersComponent implements OnInit {
   dataSourceDN: any;
   searchTextUF: any;
   searchTextDN: any;
-  displayedColumns: string[] = ['index', 'id', 'name', 'email', 'date', 'phone', 'total', 'status', 'paymentmethod','actions'];
+  displayedColumns: string[] = ['index', 'id', 'name', 'email', 'date', 'phone', 'total', 'status', 'paymentmethod', 'actions'];
   displayedColumns2: string[] = ['index', 'id', 'name', 'email', 'date', 'phone', 'total', 'status', 'paymentmethod'];
   @ViewChild(MatPaginator) paginator?: MatPaginator;
-  constructor(private adminService: AdminService, public dialog: MatDialog) { }
+  constructor(private adminService: AdminService, public dialog: MatDialog,private datePipe : DatePipe) { }
 
   ngOnInit(): void {
     this.getAllOrderUF()
@@ -75,7 +85,7 @@ export class OrdersComponent implements OnInit {
     })
   }
 
-  updateOrder(id:any){
+  updateOrder(id: any) {
     Swal.fire({
       icon: 'info',
       title: 'Thông báo',
@@ -83,14 +93,40 @@ export class OrdersComponent implements OnInit {
       confirmButtonText: 'Xác nhận',
       confirmButtonColor: 'black',
       showCancelButton: true,
-      cancelButtonText:'Không'
+      cancelButtonText: 'Không'
     }).then((result) => {
       if (result.isConfirmed) {
         this.adminService.updateOrder(id).subscribe();
         window.location.reload();
       }
     })
-    
+  }
+
+
+  get fromDateUF() { return this.datePipe.transform(this.range.get('start')?.value, 'dd-MM-yyyy'); }
+  get toDateUF() { return this.datePipe.transform(this.range.get('end')?.value, 'dd-MM-yyyy'); }
+
+  filterDateRangeUF() {
+    this.dataSourceUF.filterPredicate = (data: any, filter: any) => {
+      if (this.fromDateUF && this.toDateUF) {
+        return data.date >= this.fromDateUF && data.date <= this.toDateUF;
+      }
+      return true;
+    }
+    this.dataSourceUF.filter = ''+Math.random();
+  }
+
+  get fromDateDN() { return this.datePipe.transform(this.range2.get('start')?.value, 'dd-MM-yyyy'); }
+  get toDateDN() { return this.datePipe.transform(this.range2.get('end')?.value, 'dd-MM-yyyy'); }
+
+  filterDateRangeDN() {
+    this.dataSourceDN.filterPredicate = (data: any, filter: any) => {
+      if (this.fromDateDN && this.toDateDN) {
+        return data.date >= this.fromDateDN && data.date <= this.toDateDN;
+      }
+      return true;
+    }
+    this.dataSourceDN.filter = ''+Math.random();
   }
 
 }
