@@ -72,8 +72,17 @@ export class ProductsComponent implements OnInit {
       cancelButtonText: 'Không'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.adminService.deleteProd(id).subscribe()
-        window.location.reload()
+        if (this.adminService.deleteProd(id).subscribe(res=>{},error=>{
+          Swal.fire({
+            title: 'Thông báo',
+            html: "Đã xảy ra lỗi, có thể sản phẩm này liên kết với bảng khác!",
+            icon: 'error',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Xác nhận',
+          })
+        })) {
+          window.location.reload()
+        }
       }
     })
   }

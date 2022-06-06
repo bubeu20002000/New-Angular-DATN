@@ -33,7 +33,7 @@
     </div>
     <div class="col-3">
         <div class="card p-4 m-4">
-            <h1><strong>{{sum_total | number}}đ</strong></h1>
+            <h1><strong>{{sum_total==null?0:sum_total| number}}đ</strong></h1>
             <p>Tổng thu nhập</p>
         </div>
     </div>
@@ -41,8 +41,8 @@
 <div class="row">
     <div class="col-3">
         <div class="card p-4 m-4">
-            <h1><strong>{{sum_monthly| number}}đ</strong></h1>
-            <p>Thu nhập tháng {{month}} </p>
+            <h1><strong>{{sum_monthly==null?0:sum_monthly| number}}đ</strong></h1>
+            <p>Thu nhập tháng hiện tại - tháng {{month}} </p>
         </div>
     </div>
 </div>

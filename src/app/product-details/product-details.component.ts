@@ -18,12 +18,12 @@ export class ProductDetailsComponent implements OnInit {
   prodname: any;
   sku: any;
   type: any;
-  price: number[]=[];
+  price: number[] = [];
   price_selected = 0;
-  discount:number[]=[];
+  discount: number[] = [];
   discount_selected = 0;
-  only_price:any;
-  only_discount:any;
+  only_price: any;
+  only_discount: any;
   show = false;
   same = false;
   discount_show = false;
@@ -40,7 +40,7 @@ export class ProductDetailsComponent implements OnInit {
   check = false;
   stock: any;
   quantity = 1;
-  
+
   min = 0;
   max = 0;
   constructor(private route: ActivatedRoute, private tokenStorageService: TokenStorageService, private router: Router, private prodService: ProductService, private cartService: CartService) {
@@ -59,7 +59,7 @@ export class ProductDetailsComponent implements OnInit {
       this.sku = res['sku'];
       this.only_price = res['prodprice'];
       this.only_discount = res['proddiscount'];
-    
+
       this.type = res['prodtype'];
       if (this.cate = res['categories']['catname'] == 'Men') {
         this.cate = 'Nam'
@@ -85,7 +85,7 @@ export class ProductDetailsComponent implements OnInit {
 
       this.getSizes();
       this.getPrice();
-      
+
     })
   }
 
@@ -104,13 +104,13 @@ export class ProductDetailsComponent implements OnInit {
         this.price.push(res[r].split(',')[0]);
         this.discount.push(res[r].split(',')[1]);
       })
-    this.min = this.discount.reduce((a, b)=>Math.min(a, b)); 
-    this.max = this.discount.reduce((a, b)=>Math.max(a, b));
-    if(this.min == this.max){
-      this.same = true;
-    }else{
-      this.same = false;
-    }
+      this.min = this.discount.reduce((a, b) => Math.min(a, b));
+      this.max = this.discount.reduce((a, b) => Math.max(a, b));
+      if (this.min == this.max) {
+        this.same = true;
+      } else {
+        this.same = false;
+      }
     })
   }
 
@@ -123,16 +123,16 @@ export class ProductDetailsComponent implements OnInit {
     this.price_selected = this.price[i];
     this.discount_selected = this.discount[i];
 
-    if(this.price_selected != this.discount_selected){
+    if (this.price_selected != this.discount_selected) {
       this.show = true;
       this.discount_show = true;
       this.price_show = false;
-    }else{
+    } else {
       this.show = true;
       this.price_show = true;
       this.discount_show = false;
     }
-    
+
   }
 
   checkSize() {

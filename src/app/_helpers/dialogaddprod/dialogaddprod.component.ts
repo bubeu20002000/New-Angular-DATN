@@ -51,7 +51,6 @@ export class DialogaddprodComponent implements OnInit {
       prodimg2: this.formFix.controls.prodimg2.value,
       proddiscount: this.formFix.controls.proddiscount.value,
     }
-    console.log(data,categories)
     Swal.fire({
       title: 'Thông báo',
       text: "Bạn có muốn thêm không?",

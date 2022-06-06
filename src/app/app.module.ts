@@ -54,6 +54,7 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { DialoginfoprodComponent } from './_helpers/dialoginfoprod/dialoginfoprod.component';
 import { DialogfixprodComponent } from './_helpers/dialogfixprod/dialogfixprod.component';
 import { DialogaddprodComponent } from './_helpers/dialogaddprod/dialogaddprod.component';
+import { DialogadduserComponent } from './_helpers/dialogadduser/dialogadduser.component';
 export const MY_FORMATS = {
   parse: {
       dateInput: 'LL'
@@ -99,6 +100,7 @@ export const MY_FORMATS = {
     DialoginfoprodComponent,
     DialogfixprodComponent,
     DialogaddprodComponent,
+    DialogadduserComponent,
   ],
   imports: [
     BrowserModule,

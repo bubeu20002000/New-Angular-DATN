@@ -55,8 +55,11 @@
           </div>
 
           <hr>
-          <h3 *ngIf="!show && !discount_show && !price_show && !same" class="product-price">{{min|number}}đ - {{max|number}}đ</h3>
-          <h3 *ngIf="!show && !discount_show && !price_show && same" class="product-price">{{only_price-(only_price*(only_discount/100))|number}}đ<del class="pl-3" *ngIf="!show && !discount_show && !price_show ">{{only_price| number}}đ</del></h3>
+          <h3 *ngIf="!show && !discount_show && !price_show && !same" class="product-price">{{min|number}}đ -
+            {{max|number}}đ</h3>
+          <h3 *ngIf="!show && !discount_show && !price_show && same" class="product-price">
+            {{only_price-(only_price*(only_discount/100))|number}}đ<del class="pl-3"
+              *ngIf="!same">{{only_price| number}}đ</del></h3>
           <!-- <h3 class="product-price" *ngIf="discount_show && status">{{price - price*(discount/100) |
             number}}đ<del class="pl-2">{{price | number}}đ </del></h3>
           <h3 class="product-price" *ngIf="!discount_show && status">{{price | number}}đ</h3> -->
@@ -90,7 +93,6 @@
           <!-- <div>
             <a class="btn btn-main mt-4" *ngIf="!status">Hết hàng</a>
           </div> -->
-
           <div class="products-meta mt-4">
             <div class="product-category d-flex align-items-center">
               <span class="font-weight-bold text-capitalize product-meta-title">Màu sắc:</span>

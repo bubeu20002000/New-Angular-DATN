@@ -27,4 +27,12 @@ export class AuthService {
       password
     }, httpOptions);
   }
+  addUser(username: string, email: string, password: string, role:any): Observable<any>{
+    return this.http.post(AUTH_API + 'signup', {
+      username,
+      email,
+      password,
+      role
+    }, httpOptions);
+  }
 }

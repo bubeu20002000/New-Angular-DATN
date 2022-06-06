@@ -20,8 +20,8 @@ export class AdminService {
   getCountInfo(month:any) {
     return this.http.get<any>(API_URL + 'count/'+month, { headers: this.header });
   }
-  getAllUsers(){
-    return this.http.get<any>(API_URL + 'user', { headers: this.header });
+  getAllUsers(id:any){
+    return this.http.get<any>(API_URL + 'user/'+id, { headers: this.header });
   }
   getAllProds(){
     return this.http.get<any>(API_URL + 'product', { headers: this.header });
@@ -43,5 +43,8 @@ export class AdminService {
   }
   addProd(cid:any,data:any){
     return this.http.post<any>(API_URL + 'add_prod/'+cid,data,{ headers: this.header });
+  }
+  deleteUser(id:any){
+    return this.http.delete<any>(API_URL + 'delete_user/'+id,{ headers: this.header });
   }
 }

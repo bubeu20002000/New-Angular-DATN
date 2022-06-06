@@ -81,11 +81,12 @@
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef> Hành động </th>
             <td mat-cell *matCellDef="let row">
-                <button class="btn-black mr-2" (click)="fixProd(row.id,row.sku,row.prodname,row.prodtype,row.prodcolor,row.prodsize,row.prodinstock,row.prodprice,row.prodstatus,row.proddescription,row.prodimg1,row.prodimg2,row.proddiscount,row.categories)">Sửa</button>
+                <button class="btn-black mr-2"
+                    (click)="fixProd(row.id,row.sku,row.prodname,row.prodtype,row.prodcolor,row.prodsize,row.prodinstock,row.prodprice,row.prodstatus,row.proddescription,row.prodimg1,row.prodimg2,row.proddiscount,row.categories)">Sửa</button>
                 <button class="btn-black mr-2"
                     (click)="openDialog(row.sku,row.prodname,row.prodtype,row.prodcolor,row.prodsize,row.prodinstock,row.prodprice,row.prodstatus,row.proddescription,row.prodimg1,row.prodimg2,row.proddiscount,row.categories)">Chi
                     tiết</button>
-                <!-- <button class="btn-black" (click)="delProd(row.id,row.prodname)">Xóa</button> -->
+                <button class="btn-black" (click)="delProd(row.id,row.prodname)">Xóa</button>
             </td>
         </ng-container>
 
