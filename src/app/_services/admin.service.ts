@@ -17,8 +17,8 @@ export class AdminService {
     );
    }
 
-  getCountInfo() {
-    return this.http.get<any>(API_URL + 'count', { headers: this.header });
+  getCountInfo(month:any) {
+    return this.http.get<any>(API_URL + 'count/'+month, { headers: this.header });
   }
   getAllUsers(){
     return this.http.get<any>(API_URL + 'user', { headers: this.header });

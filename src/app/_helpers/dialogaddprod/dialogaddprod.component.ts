@@ -63,7 +63,7 @@ export class DialogaddprodComponent implements OnInit {
       cancelButtonText:'Không'
     }).then((result) => {
       if (result.isConfirmed) {
-        // this.adminService.addProd(categories,data).subscribe()
+        this.adminService.addProd(categories,data).subscribe()
         window.location.reload()
       }
     })
