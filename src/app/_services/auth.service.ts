@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 
-const AUTH_API = 'http://localhost:8080/api/auth/';
+const AUTH_API = 'http://nnn-env.eba-43umkkn4.us-east-1.elasticbeanstalk.com/api/auth/';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };

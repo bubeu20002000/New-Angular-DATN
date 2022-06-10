@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FunctionsService } from '../_services/functions.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { UserService } from '../_services/user.service';
@@ -15,11 +16,11 @@ export class UserAddressEditComponent implements OnInit {
   @Input() District: any;
   @Input() Ward: any;
   currentUser: any;
-  cities: Array<any>=[];
-  districts: Array<any>=[];
-  filter_districts: Array<any>=[];
-  wards: Array<any>=[];
-  filter_wards: Array<any>=[];
+  cities: Array<any> = [];
+  districts: Array<any> = [];
+  filter_districts: Array<any> = [];
+  wards: Array<any> = [];
+  filter_wards: Array<any> = [];
 
   test: Array<any> = [];
   testz: Array<any> = [];
@@ -28,23 +29,27 @@ export class UserAddressEditComponent implements OnInit {
   constructor(private tokenStorageService: TokenStorageService
     , private funtions: FunctionsService
     , private userService: UserService
-    )
-    { }
-  
+    , private route: Router
+  ) { }
+
   ngOnInit(): void {
-    this.currentUser = this.tokenStorageService.getUser();
+    if (!this.tokenStorageService.getToken()) {
+      this.route.navigate(['/login'])
+    } else {
+      this.currentUser = this.tokenStorageService.getUser();
 
-    this.funtions.getAllCities().subscribe(res =>{
-      this.cities = res
-    })
+      this.funtions.getAllCities().subscribe(res => {
+        this.cities = res
+      })
 
-    this.funtions.getAllDistricts().subscribe(res =>{
-      this.districts = res
-    })
+      this.funtions.getAllDistricts().subscribe(res => {
+        this.districts = res
+      })
 
-    this.funtions.getAllWards().subscribe(res =>{
-      this.wards = res
-    })
+      this.funtions.getAllWards().subscribe(res => {
+        this.wards = res
+      })
+    }
   }
 
   onSelectCity(city_id: any) {
@@ -54,13 +59,13 @@ export class UserAddressEditComponent implements OnInit {
     this.filter_districts = this.districts.filter((item) => {
       return item.province_code == city_id.value
     });
-    this.test = this.cities.filter((item)=>{
+    this.test = this.cities.filter((item) => {
       return item.code == city_id.value
     })
-    for(var city of this.test){
+    for (var city of this.test) {
       this.City = city.name;
     }
-    
+
   }
 
   onSelectDistrict(district_id: any) {
@@ -69,28 +74,28 @@ export class UserAddressEditComponent implements OnInit {
       return item.district_code == district_id.value
     });
 
-    this.testz = this.districts.filter((item)=>{
+    this.testz = this.districts.filter((item) => {
       return item.code == district_id.value
     })
-    for(var city of this.testz){
+    for (var city of this.testz) {
       this.District = city.name;
     }
   }
 
-  onSelectWard(ward_id:any){
-    this.testzz = this.wards.filter((item)=>{
+  onSelectWard(ward_id: any) {
+    this.testzz = this.wards.filter((item) => {
       return item.code == ward_id.value
     })
-    for(var city of this.testzz){
+    for (var city of this.testzz) {
       this.Ward = city.name;
     }
   }
 
-  callLogout(){
+  callLogout() {
     this.funtions.logout();
   }
 
-  updateAddr(){
+  updateAddr() {
     window.location.reload();
     const data = {
       address_1: this.Addr_1,
@@ -99,12 +104,12 @@ export class UserAddressEditComponent implements OnInit {
       ward: this.Ward
     };
     this.userService.updateAddr(this.currentUser.id, data)
-    .subscribe(
-      response => {
-        console.log(response);
-      },
-      error => {
-        console.log(error);
-      });
+      .subscribe(
+        response => {
+          console.log(response);
+        },
+        error => {
+          console.log(error);
+        });
   }
 }

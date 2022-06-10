@@ -2,10 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { DialogaddprodComponent } from 'src/app/_helpers/dialogaddprod/dialogaddprod.component';
 import { DialogfixprodComponent } from 'src/app/_helpers/dialogfixprod/dialogfixprod.component';
 import { DialoginfoprodComponent } from 'src/app/_helpers/dialoginfoprod/dialoginfoprod.component';
 import { AdminService } from 'src/app/_services/admin.service';
+import { TokenStorageService } from 'src/app/_services/token-storage.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,17 +16,22 @@ import Swal from 'sweetalert2';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-
+  array: String[] = []
   data: any;
   dataSource: any;
   searchText: any;
   displayedColumns: string[] = ['index', 'sku', 'prodname', 'prodtype', 'categories', 'prodsize', 'prodcolor', 'prodprice', 'prodinstock', 'prodstatus', 'proddiscount', 'actions']; //'prodimg1', 'prodimg2', 'proddescription',
   @ViewChild(MatPaginator) paginator?: MatPaginator;
-  constructor(private adminService: AdminService, public dialog: MatDialog) {
+  constructor(private adminService: AdminService, public dialog: MatDialog,private token: TokenStorageService, private route: Router) {
   }
 
   ngOnInit(): void {
-    this.getAllProd()
+    this.array = this.token.getUser().roles
+    if (this.array && this.array.includes('ROLE_ADMIN')){
+      this.getAllProd()
+    } else {
+      this.route.navigate(['/login'])
+    }
   }
 
   getAllProd() {

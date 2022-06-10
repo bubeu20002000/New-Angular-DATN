@@ -4,8 +4,10 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { DialoginfoorderComponent } from 'src/app/_helpers/dialoginfoorder/dialoginfoorder.component';
 import { AdminService } from 'src/app/_services/admin.service';
+import { TokenStorageService } from 'src/app/_services/token-storage.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -23,7 +25,7 @@ export class OrdersComponent implements OnInit {
     start: new FormControl(null),
     end: new FormControl(null),
   });
-
+  array: String[] = []
   dataUF: any;
   dataDN: any;
   dataSourceUF: any;
@@ -33,11 +35,16 @@ export class OrdersComponent implements OnInit {
   displayedColumns: string[] = ['index', 'id', 'name', 'email', 'date', 'phone', 'total', 'status', 'paymentmethod', 'actions'];
   displayedColumns2: string[] = ['index', 'id', 'name', 'email', 'date', 'phone', 'total', 'status', 'paymentmethod'];
   @ViewChild(MatPaginator) paginator?: MatPaginator;
-  constructor(private adminService: AdminService, public dialog: MatDialog,private datePipe : DatePipe) { }
+  constructor(private adminService: AdminService, public dialog: MatDialog, private datePipe: DatePipe, private route: Router, private token: TokenStorageService) { }
 
   ngOnInit(): void {
-    this.getAllOrderUF()
-    this.getAllOrderDN()
+    this.array = this.token.getUser().roles
+    if (this.array && this.array.includes('ROLE_ADMIN')) {
+      this.getAllOrderUF()
+      this.getAllOrderDN()
+    } else {
+      this.route.navigate(['/login'])
+    }
   }
 
   getAllOrderUF() {
@@ -113,7 +120,7 @@ export class OrdersComponent implements OnInit {
       }
       return true;
     }
-    this.dataSourceUF.filter = ''+Math.random();
+    this.dataSourceUF.filter = '' + Math.random();
   }
 
   get fromDateDN() { return this.datePipe.transform(this.range2.get('start')?.value, 'dd-MM-yyyy'); }
@@ -126,7 +133,7 @@ export class OrdersComponent implements OnInit {
       }
       return true;
     }
-    this.dataSourceDN.filter = ''+Math.random();
+    this.dataSourceDN.filter = '' + Math.random();
   }
 
 }

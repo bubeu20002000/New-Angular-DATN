@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TokenStorageService } from './token-storage.service';
 
-const API_URL = 'http://localhost:8080/api/admin/';
+const API_URL = 'http://nnn-env.eba-43umkkn4.us-east-1.elasticbeanstalk.com/api/admin/';
 
 @Injectable({
   providedIn: 'root'

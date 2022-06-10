@@ -73,39 +73,41 @@ export class PageCheckoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.getItemsCart();
-
-    this.funtions.getAllCities().subscribe(res => {
-      this.cities = res
-    })
-
-    this.funtions.getAllDistricts().subscribe(res => {
-      this.districts = res
-    })
-
-    this.funtions.getAllWards().subscribe(res => {
-      this.wards = res
-    })
-
-    if (this.token.getUser().address_1 != null) {
-      this.form.controls['address'].setValue(this.token.getUser().address_1);
+    if(!this.token.getToken()){
+      this.route.navigate(['/login'])
     } else {
-      this.form.controls['address'].setValue('');
-    }
+      this.getItemsCart();
 
-    if (this.token.getUser().phone_number != null) {
-      this.form.controls['phone'].setValue(this.token.getUser().phone_number);
-    } else {
-      this.form.controls['phone'].setValue('');
+      this.funtions.getAllCities().subscribe(res => {
+        this.cities = res
+      })
+  
+      this.funtions.getAllDistricts().subscribe(res => {
+        this.districts = res
+      })
+  
+      this.funtions.getAllWards().subscribe(res => {
+        this.wards = res
+      })
+  
+      if (this.token.getUser().address_1 != null) {
+        this.form.controls['address'].setValue(this.token.getUser().address_1);
+      } else {
+        this.form.controls['address'].setValue('');
+      }
+  
+      if (this.token.getUser().phone_number != null) {
+        this.form.controls['phone'].setValue(this.token.getUser().phone_number);
+      } else {
+        this.form.controls['phone'].setValue('');
+      }
+  
+      if (this.token.getUser().email != null) {
+        this.form.controls['email'].setValue(this.token.getUser().email);
+      } else {
+        this.form.controls['email'].setValue('');
+      }
     }
-
-    if (this.token.getUser().email != null) {
-      this.form.controls['email'].setValue(this.token.getUser().email);
-    } else {
-      this.form.controls['email'].setValue('');
-    }
-
   }
 
   getTransferFee() {

@@ -3,6 +3,7 @@ import { FunctionsService } from '../_services/functions.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { UserService } from '../_services/user.service';
 import { faCircleArrowLeft, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-address',
@@ -14,7 +15,8 @@ export class UserAddressComponent implements OnInit {
   constructor(private tokenStorageService: TokenStorageService
     , private funtions: FunctionsService
     , private userService: UserService
-    ) { }
+    , private route: Router
+  ) { }
 
   faCircleArrowLeft = faCircleArrowLeft;
   faPenToSquare = faPenToSquare;
@@ -29,25 +31,29 @@ export class UserAddressComponent implements OnInit {
 
   show: any;
   num: any;
-  
+
   ngOnInit(): void {
-    this.currentUser = this.tokenStorageService.getUser();
-    this.userService.getInfo(this.currentUser.id).subscribe(
-      result => {
-        this.currentData = result
-        this.currentAddr_1 = result.address_1
-        this.currentCity = result.city
-        this.currentDistrict = result.district
-        this.currentWard = result.ward
-      }
-    )
+    if (!this.tokenStorageService.getToken()) {
+      this.route.navigate(['/login'])
+    } else {
+      this.currentUser = this.tokenStorageService.getUser();
+      this.userService.getInfo(this.currentUser.id).subscribe(
+        result => {
+          this.currentData = result
+          this.currentAddr_1 = result.address_1
+          this.currentCity = result.city
+          this.currentDistrict = result.district
+          this.currentWard = result.ward
+        }
+      )
+    }
   }
 
-  hidden(){
+  hidden() {
     this.show = !this.show;
   }
 
-  callLogout(): void{
+  callLogout(): void {
     this.funtions.logout();
   }
 

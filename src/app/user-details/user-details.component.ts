@@ -1,6 +1,7 @@
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { FunctionsService } from '../_services/functions.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { UserService } from '../_services/user.service';
@@ -29,13 +30,18 @@ export class UserDetailsComponent implements OnInit {
   constructor(private tokenStorageService: TokenStorageService
     , private funtions: FunctionsService
     , private userService: UserService
+    , private route: Router
   ) { }
 
   ngOnInit(): void {
-    this.userService.getInfo(this.tokenStorageService.getUser().id).subscribe(res => {
-      this.email = res["email"]
-      this.phone = res["phone_number"]
-    })
+    if(!this.tokenStorageService.getToken()){
+      this.route.navigate(['/login'])
+    } else {
+      this.userService.getInfo(this.tokenStorageService.getUser().id).subscribe(res => {
+        this.email = res["email"]
+        this.phone = res["phone_number"]
+      })
+    }
   }
 
   callLogout() {
